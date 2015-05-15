@@ -79,6 +79,16 @@ public class PlayerUtils {
         ChatUtils.msgPlayer(p, "&3-" + remove + " xp levels! (" + reason + ")");
         p.playSound(p.getLocation(), Sound.NOTE_PLING, 100, 1);
     }
+
+    public static void setResourcePack(Player p, String url){
+        ChatUtils.msgPlayerTag(p, "ResourcePacks", "Sending ResourcePack...");
+        p.setResourcePack(url);
+    }
+
+    public static void kickPlayer(Player p, String reason){
+        p.kickPlayer(MiscUtils.color(reason));
+    }
+
 }
 
 

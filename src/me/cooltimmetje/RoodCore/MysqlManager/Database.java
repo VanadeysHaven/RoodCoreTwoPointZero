@@ -50,6 +50,7 @@ public class Database {
                 DataClass.tokens.put(p.getName(), rs.getInt("tokens"));
                 DataClass.tokensTime.put(p.getName(), rs.getInt("token_time"));
                 DataClass.experiencePoint.put(p.getName(), rs.getInt("experience_point"));
+                DataClass.resourcePack.put(p.getName(), rs.getInt("resource_pack"));
                 ChatUtils.msgPlayerTag(p, "Profile", "Profile loaded! &lWE DID IT! &a*dances*");
             } else {
                 ChatUtils.msgPlayerTag(p, "Profile", "You do not have a profile yet! So we will create one for you! This process will happen automagically with the use of" +
@@ -93,7 +94,7 @@ public class Database {
         PreparedStatement ps = null;
         ResultSet rs = null;
         String uuid = PlayerUtils.getUUID(p);
-        String update = "INSERT INTO playerdata VALUES(?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE uuid=?";
+        String update = "INSERT INTO playerdata VALUES(?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE uuid=?";
 
         try{
             c = hikari.getConnection();
@@ -105,7 +106,8 @@ public class Database {
             ps.setInt(4, 0);
             ps.setInt(5, DataClass.tokenTime);
             ps.setInt(6, 0);
-            ps.setString(7, uuid);
+            ps.setInt(7, 0);
+            ps.setString(8, uuid);
             ps.execute();
             ChatUtils.msgPlayerTag(p, "Profile", "Profile created! &lYaaay! &a*whoop whoop*");
         } catch (SQLException e){
@@ -138,7 +140,7 @@ public class Database {
         Connection c = null;
         PreparedStatement ps = null;
         String uuid = PlayerUtils.getUUID(p);
-        String update = "INSERT INTO playerdata VALUES(?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE uuid=?,tokens=?,token_time=?,experience_point=?";
+        String update = "INSERT INTO playerdata VALUES(?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE uuid=?,tokens=?,token_time=?,experience_point=?,resource_pack=?";
 //        String update = "UPDATE playerdata SET uuid=?,last_name=?,last_ip_adress=?,tokens=?,token_time=? WHERE 1";
         try{
             c = hikari.getConnection();
@@ -150,10 +152,12 @@ public class Database {
             ps.setInt(4, DataClass.tokens.get(p.getName()));
             ps.setInt(5, DataClass.tokensTime.get(p.getName()));
             ps.setInt(6, DataClass.experiencePoint.get(p.getName()));
-            ps.setString(7, uuid);
-            ps.setInt(8, DataClass.tokens.get(p.getName()));
-            ps.setInt(9, DataClass.tokensTime.get(p.getName()));
-            ps.setInt(10, DataClass.experiencePoint.get(p.getName()));
+            ps.setInt(7, DataClass.resourcePack.get(p.getName()));
+            ps.setString(8, uuid);
+            ps.setInt(9, DataClass.tokens.get(p.getName()));
+            ps.setInt(10, DataClass.tokensTime.get(p.getName()));
+            ps.setInt(11, DataClass.experiencePoint.get(p.getName()));
+            ps.setInt(12, DataClass.resourcePack.get(p.getName()));
             ps.execute();
             TitleUtils.sendActionTag(p, "Profile", "Profile saved!");
         } catch (SQLException e){

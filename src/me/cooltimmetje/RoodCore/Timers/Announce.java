@@ -12,7 +12,7 @@ import org.bukkit.Bukkit;
 public class Announce {
 
     public static void announcer() {
-        DataClass.listAnnounce();
+        DataClass.setAnnounce();
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), new Runnable() {
             @Override
             public void run() {

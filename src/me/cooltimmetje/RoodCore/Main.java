@@ -1,13 +1,14 @@
 package me.cooltimmetje.RoodCore;
 
-import me.cooltimmetje.RoodCore.Commands.ExperienceSystem;
-import me.cooltimmetje.RoodCore.Commands.TokensCommand;
+import me.cooltimmetje.RoodCore.Commands.*;
 import me.cooltimmetje.RoodCore.Core.DataClass;
 import me.cooltimmetje.RoodCore.EventListeners.JoinQuitEvent;
+import me.cooltimmetje.RoodCore.EventListeners.ResourcePackEvent;
 import me.cooltimmetje.RoodCore.MysqlManager.Database;
 import me.cooltimmetje.RoodCore.Timers.Announce;
 import me.cooltimmetje.RoodCore.Timers.DataSaving;
 import me.cooltimmetje.RoodCore.Timers.Tokens;
+import me.cooltimmetje.RoodCore.UserInterfaces.JukeboxUI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -22,22 +23,31 @@ public class Main extends JavaPlugin {
     private static Plugin plugin;
 
     @Override
-    public void onEnable(){
+    public void onEnable() {
         this.saveDefaultConfig();
         plugin = this;
         Database.connectToDatabase();
 
-        registerEvents(this, new JoinQuitEvent());
+        registerEvents(this, new JoinQuitEvent(), new ResourcePackEvent(), new JukeboxUI());
         getCommand("tokens").setExecutor(new TokensCommand());
         getCommand("xp").setExecutor(new ExperienceSystem());
+        getCommand("rp").setExecutor(new ResourcePackCommand());
+        getCommand("codetim").setExecutor(new CodeCommand());
+        getCommand("coderood").setExecutor(new CodeCommand());
+        getCommand("swaggergear").setExecutor(new SwaggerGear());
+        getCommand("masstokens").setExecutor(new MassTokens());
 
-        for(Player p : Bukkit.getOnlinePlayers()){
+        for (Player p : Bukkit.getOnlinePlayers()) {
             Database.loadData(p);
         }
 
         Announce.announcer();
         Tokens.tokensGiver();
         DataSaving.dataSaver();
+        DataClass.setResourceURL();
+        DataClass.setResource1();
+        DataClass.setResource2();
+        DataClass.setResourceList();
     }
 
     @Override

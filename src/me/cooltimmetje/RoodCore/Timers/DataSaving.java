@@ -18,7 +18,7 @@ public class DataSaving {
                     Database.saveData(p);
                 }
             }
-        }, 6000, 6000);
+        }, 12000, 12000);
     }
 
 }

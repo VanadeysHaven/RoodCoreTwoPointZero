@@ -8,3 +8,13 @@ commands:
         description: tokens
     xp:
         description: xp
+    rp:
+        description: rp
+    codetim:
+        description: codetim
+    coderood:
+        description: coderood
+    swaggergear:
+        description: swaggergear
+    masstokens:
+        description: masstokens
