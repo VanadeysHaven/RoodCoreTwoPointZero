@@ -1,0 +1,6 @@
+Database:
+    serverName: localhost
+    port: 3306
+    databaseName: database
+    user: root
+    password: SwaggyPasswordOfDoom

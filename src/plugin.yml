@@ -1,0 +1,10 @@
+name: RoodCore
+version: 2.0
+description: R00DCore
+author: cooltimmetje
+main: me.cooltimmetje.RoodCore.Main
+commands:
+    tokens:
+        description: tokens
+    xp:
+        description: xp
