@@ -2,6 +2,7 @@ package me.cooltimmetje.RoodCore;
 
 import me.cooltimmetje.RoodCore.Commands.*;
 import me.cooltimmetje.RoodCore.Core.DataClass;
+import me.cooltimmetje.RoodCore.Core.Rankup;
 import me.cooltimmetje.RoodCore.EventListeners.JoinQuitEvent;
 import me.cooltimmetje.RoodCore.EventListeners.ResourcePackEvent;
 import me.cooltimmetje.RoodCore.MysqlManager.Database;
@@ -28,7 +29,7 @@ public class Main extends JavaPlugin {
         plugin = this;
         Database.connectToDatabase();
 
-        registerEvents(this, new JoinQuitEvent(), new ResourcePackEvent(), new JukeboxUI());
+        registerEvents(this, new JoinQuitEvent(), new ResourcePackEvent(), new JukeboxUI(), new Rankup());
         getCommand("tokens").setExecutor(new TokensCommand());
         getCommand("xp").setExecutor(new ExperienceSystem());
         getCommand("rp").setExecutor(new ResourcePackCommand());
@@ -36,6 +37,7 @@ public class Main extends JavaPlugin {
         getCommand("coderood").setExecutor(new CodeCommand());
         getCommand("swaggergear").setExecutor(new SwaggerGear());
         getCommand("masstokens").setExecutor(new MassTokens());
+        getCommand("rankup").setExecutor(new Rankup());
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             Database.loadData(p);
@@ -47,7 +49,9 @@ public class Main extends JavaPlugin {
         DataClass.setResourceURL();
         DataClass.setResource1();
         DataClass.setResource2();
+        DataClass.setResource3();
         DataClass.setResourceList();
+        DataClass.listRanks();
     }
 
     @Override

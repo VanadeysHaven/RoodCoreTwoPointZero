@@ -18,3 +18,5 @@ commands:
         description: swaggergear
     masstokens:
         description: masstokens
+    rankup:
+        description: rankup

@@ -71,6 +71,7 @@ public class CodeCommand implements CommandExecutor{
     }
 
     private void shootTim(Player p, Player tim) {
+        tim.setFlying(false);
         TitleUtils.sendTitle("&aYou shot " + tim.getDisplayName() + " &ainto the sky!", "&9+2 tokens!", 20, 60, 20, p);
         TitleUtils.sendTitle(p.getDisplayName() + "&a shot you into the sky!", "&9+2 tokens!", 20, 60, 20, tim);
         tim.setVelocity(new Vector(0, 3, 0));
@@ -79,6 +80,7 @@ public class CodeCommand implements CommandExecutor{
     }
 
     private void shootRood(Player p, Player rood){
+        rood.setFlying(false);
         rood.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 400, 10));
         TitleUtils.sendTitle("&aYou shot " + rood.getDisplayName() + " &ainto the sky!", "&9+2 tokens!", 20, 60, 20, p);
         TitleUtils.sendTitle(p.getDisplayName() + "&a shot you into the sky!", "&9+2 tokens!", 20, 60, 20, rood);

@@ -1,9 +1,11 @@
 package me.cooltimmetje.RoodCore.MysqlManager;
 
 import com.zaxxer.hikari.HikariDataSource;
+import io.puharesource.mc.titlemanager.api.ActionbarTitleObject;
 import me.cooltimmetje.RoodCore.Core.DataClass;
 import me.cooltimmetje.RoodCore.Main;
 import me.cooltimmetje.RoodCore.Utilities.ChatUtils;
+import me.cooltimmetje.RoodCore.Utilities.MiscUtils;
 import me.cooltimmetje.RoodCore.Utilities.PlayerUtils;
 import me.cooltimmetje.RoodCore.Utilities.TitleUtils;
 import org.bukkit.entity.Player;
@@ -136,7 +138,7 @@ public class Database {
     }
 
     public static void saveData(Player p) {
-        TitleUtils.sendActionTag(p, "Profile", "Saving profile... &oPlease Wait...");
+        new ActionbarTitleObject("\u00A79Profile> \u00A7aSaving profile... \u00A7oPlease Wait...").send(p);
         Connection c = null;
         PreparedStatement ps = null;
         String uuid = PlayerUtils.getUUID(p);
@@ -159,7 +161,7 @@ public class Database {
             ps.setInt(11, DataClass.experiencePoint.get(p.getName()));
             ps.setInt(12, DataClass.resourcePack.get(p.getName()));
             ps.execute();
-            TitleUtils.sendActionTag(p, "Profile", "Profile saved!");
+            new ActionbarTitleObject("\u00A79Profile> \u00A7aProfile saved!").send(p);
         } catch (SQLException e){
             e.printStackTrace();
             ChatUtils.msgPlayerTag(p, "Profile", ChatUtils.error + "Profile saving failed! Please relog to retry!");
