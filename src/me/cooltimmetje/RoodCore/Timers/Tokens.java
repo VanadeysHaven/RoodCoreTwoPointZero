@@ -5,6 +5,7 @@ import me.cooltimmetje.RoodCore.Main;
 import me.cooltimmetje.RoodCore.Utilities.ChatUtils;
 import me.cooltimmetje.RoodCore.Utilities.MiscUtils;
 import me.cooltimmetje.RoodCore.Utilities.PlayerUtils;
+import me.cooltimmetje.RoodCore.Utilities.TitleUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -40,6 +41,8 @@ public class Tokens {
                         timeNew = DataClass.tokenTime;
                     }
                     DataClass.tokensTime.put(p.getName(), timeNew);
+                    TitleUtils.setTabList(p);
+                    p.setPlayerListName(p.getDisplayName());
                 }
             }
         }, 20, 1200);

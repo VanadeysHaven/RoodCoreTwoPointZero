@@ -1,9 +1,14 @@
 package me.cooltimmetje.RoodCore.Utilities;
 
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import me.cooltimmetje.RoodCore.Core.DataClass;
+import me.cooltimmetje.RoodCore.UserInterfaces.JukeboxUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
+import org.bukkit.block.Jukebox;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -149,6 +154,27 @@ public class MiscUtils {
         }
 
         return c;
+    }
+
+    public static void removeAllJukeboxHologram(){
+        for(Location l : JukeboxUI.jukeboxHologram.keySet()) {
+            Hologram hologram = JukeboxUI.jukeboxHologram.get(l);
+            hologram.delete();
+        }
+        JukeboxUI.jukeboxHologram.clear();
+    }
+
+    public static String randomColor(){
+        String color;
+        color = DataClass.colorCodes.get(randomInt(1,16));
+        return color;
+    }
+
+    public static void despawnItems(){
+        for(Entity item : PlayerUtils.shotItems){
+            item.remove();
+        }
+        PlayerUtils.shotItems.clear();
     }
 
 }

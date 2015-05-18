@@ -10,19 +10,20 @@ import java.util.HashMap;
 
 public class DataClass {
 
-    public static HashMap<Integer,String> announce = new HashMap<>();
-    public static HashMap<String,Integer> tokens = new HashMap<>();
-    public static HashMap<String,Integer> tokensTime = new HashMap<>();
-    public static HashMap<String,Integer> experiencePoint = new HashMap<>();
-    public static HashMap<String,Integer> resourcePack = new HashMap<>();
-    public static HashMap<Integer,String> resourceURL = new HashMap<>();
-    public static HashMap<Integer,HashMap> resourceList = new HashMap<>();
-    public static HashMap<String,String> resource1 = new HashMap<>();
-    public static HashMap<String,String> resource2 = new HashMap<>();
-    public static HashMap<String,String> resource3 = new HashMap<>();
-    public static HashMap<String,Integer> nameID = new HashMap<>();
-    public static HashMap<Integer,String> idName = new HashMap<>();
-    public static HashMap<Integer,String> idColor = new HashMap<>();
+    public static HashMap<Integer, String> announce = new HashMap<>();
+    public static HashMap<String, Integer> tokens = new HashMap<>();
+    public static HashMap<String, Integer> tokensTime = new HashMap<>();
+    public static HashMap<String, Integer> experiencePoint = new HashMap<>();
+    public static HashMap<String, Integer> resourcePack = new HashMap<>();
+    public static HashMap<Integer, String> resourceURL = new HashMap<>();
+    public static HashMap<Integer, HashMap> resourceList = new HashMap<>();
+    public static HashMap<String, String> resource1 = new HashMap<>();
+    public static HashMap<String, String> resource2 = new HashMap<>();
+    public static HashMap<String, String> resource3 = new HashMap<>();
+    public static HashMap<String, Integer> nameID = new HashMap<>();
+    public static HashMap<Integer, String> idName = new HashMap<>();
+    public static HashMap<Integer, String> idColor = new HashMap<>();
+    public static HashMap<Integer, String> colorCodes = new HashMap<>();
 
     public static int tokensIncrement = 20;
     public static int tokenDoubleChance = 10;
@@ -40,24 +41,24 @@ public class DataClass {
         announce.put(5, "Equip one of our custom-made resourcepacks! Type &o/rp <id>");
     }
 
-    public static void setResourceURL(){
+    public static void setResourceURL() {
         resourceURL.put(1, "https://www.dropbox.com/s/kgw83iyhxzn81ql/RoodMusic1.zip?dl=1");
         resourceURL.put(2, "https://www.dropbox.com/s/9a006cyx0d1g8ea/RoodMusic2.zip?dl=1");
         resourceURL.put(3, "https://www.dropbox.com/s/fo7ir54goa48s0w/RoodMusic3.zip?dl=1");
     }
 
-    public static void setResourceList(){
+    public static void setResourceList() {
         resourceList.put(1, resource1);
         resourceList.put(2, resource2);
         resourceList.put(3, resource3);
     }
 
-    public static void setResource1(){
+    public static void setResource1() {
         resource1.put("GOLD_RECORD", "Darude - Sandstorm");
-        resource1.put("GREEN_RECORD", "K3 - Mama Sé");
+        resource1.put("GREEN_RECORD", "K3 - Mama Sï¿½");
         resource1.put("RECORD_3", "New Kids - Turbo (ft. DJ Paul Elstak)");
         resource1.put("RECORD_4", "Star Wars - The Imperial March");
-        resource1.put("RECORD_5", "DJ Snake - Lean On (ft. MØ)");
+        resource1.put("RECORD_5", "DJ Snake - Lean On (ft. Mï¿½)");
         resource1.put("RECORD_6", "Pegboard Nerds - Hero (ft. Elizaveta)");
         resource1.put("RECORD_7", "Avicii - The Nights");
         resource1.put("RECORD_8", "Lets Be Friends - FTW");
@@ -65,10 +66,9 @@ public class DataClass {
         resource1.put("RECORD_10", "Pixl - The Escape");
         resource1.put("RECORD_11", "DVBBS and Borgeous - TSUNAMI");
         resource1.put("RECORD_12", "Meneer Mand - MAND!");
-
     }
 
-    public static void setResource2(){
+    public static void setResource2() {
         resource2.put("GOLD_RECORD", "Deorro - Five Hours");
         resource2.put("GREEN_RECORD", "Rick Astley - Never Gonna Give You Up");
         resource2.put("RECORD_3", "Heleentje van Cappelle - En Dan Gaan We Naar De Speeltuin");
@@ -83,13 +83,13 @@ public class DataClass {
 //        resource2.put("RECORD_12", "");
     }
 
-    public static void setResource3(){
+    public static void setResource3() {
         resource3.put("GOLD_RECORD", "Martin Garrix and Tiesto - The Only Way Is Up");
         resource3.put("GREEN_RECORD", "Axwell and Ingrosso - On My Way");
-//        resource3.put("RECORD_3", "Heleentje van Cappelle - En Dan Gaan We Naar De Speeltuin");
-//        resource3.put("RECORD_4", "Andrew Gold - Spooky Scary Skeletons (Remix)");
-//        resource3.put("RECORD_5", "Andrew Gold - Spooky Scary Skeletons (Original)");
-//        resource3.put("RECORD_6", "SKRILLEX - Bangarang (ft. Sirah)");
+        resource3.put("RECORD_3", "Mr. Belt and Wezol - Finally");
+        resource3.put("RECORD_4", "James Bay - Hold Back The River");
+        resource3.put("RECORD_5", "Steve Angello - The Power [Live at Ultra Miami 2015]");
+        resource3.put("RECORD_6", "Michael Calfan - Treasured Soul (Kryder and Genairo Nvilla Remix)");
 //        resource3.put("RECORD_7", "Pegboard Nerds - Hero (ft. Elizaveta)[Stonebank Remix]");
 //        resource3.put("RECORD_8", "Hellberg - The Girl (feat. Cozi Zuehlsdorff)");
 //        resource3.put("RECORD_9", "Muzzy - Get Crazy");
@@ -98,7 +98,26 @@ public class DataClass {
 //        resource3.put("RECORD_12", "");
     }
 
-    public static void listRanks(){
+    public static void setColorCodes(){
+        colorCodes.put(1, "0");
+        colorCodes.put(2, "1");
+        colorCodes.put(3, "2");
+        colorCodes.put(4, "3");
+        colorCodes.put(5, "4");
+        colorCodes.put(6, "5");
+        colorCodes.put(7, "6");
+        colorCodes.put(8, "7");
+        colorCodes.put(9, "8");
+        colorCodes.put(10, "9");
+        colorCodes.put(11, "a");
+        colorCodes.put(12, "b");
+        colorCodes.put(13, "c");
+        colorCodes.put(14, "d");
+        colorCodes.put(15, "e");
+        colorCodes.put(16, "f");
+    }
+
+    public static void listRanks() {
         if (nameID.isEmpty()) {
             nameID.put("User", 1);
             nameID.put("UserPlus", 2);
@@ -139,6 +158,9 @@ public class DataClass {
             nameID.put("Air", 37);
             nameID.put("AirPlus", 38);
             nameID.put("AirPlusPlus", 39);
+            nameID.put("Earth", 40);
+            nameID.put("EarthPlus",41);
+            nameID.put("EarthPlusPlus", 42);
 
         }
         if (idName.isEmpty()) {
@@ -181,6 +203,9 @@ public class DataClass {
             idName.put(37, "Air");
             idName.put(38, "AirPlus");
             idName.put(39, "AirPlusPlus");
+            idName.put(40, "Earth");
+            idName.put(41, "EarthPlus");
+            idName.put(42, "EarthPlusPlus");
         }
         if (idColor.isEmpty()) {
             idColor.put(1, "&8[&7User&8]");
@@ -222,10 +247,10 @@ public class DataClass {
             idColor.put(37, "&8[&fAir&8]");
             idColor.put(38, "&8[&fAir&6+&8]");
             idColor.put(39, "&8[&fAir&6+&c+&8]");
+            idColor.put(40, "&8[&2Earth&8]");
+            idColor.put(41, "&8[&2Earth&6+&8]");
+            idColor.put(42, "&8[&2Earth&6+&c+&8]");
         }
     }
-
-
-
 
 }

@@ -1,11 +1,11 @@
 package me.cooltimmetje.RoodCore.UserInterfaces;
 
 import com.darkblade12.particleeffect.ParticleEffect;
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import me.cooltimmetje.RoodCore.Core.DataClass;
-import me.cooltimmetje.RoodCore.Utilities.ChatUtils;
-import me.cooltimmetje.RoodCore.Utilities.InventoryUtils;
-import me.cooltimmetje.RoodCore.Utilities.MiscUtils;
-import me.cooltimmetje.RoodCore.Utilities.ScheduleUtils;
+import me.cooltimmetje.RoodCore.Main;
+import me.cooltimmetje.RoodCore.Utilities.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -16,10 +16,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+import sun.util.resources.cldr.zh.CalendarData_zh_Hans_HK;
 
 import java.util.HashMap;
 
@@ -31,6 +33,7 @@ import java.util.HashMap;
 public class JukeboxUI implements Listener {
 
     public static HashMap<String,Jukebox> jukeboxPlayer = new HashMap<>();
+    public static HashMap<Location,Hologram> jukeboxHologram = new HashMap<>();
 
     @EventHandler
     public void onRightClick(PlayerInteractEvent event){
@@ -40,9 +43,15 @@ public class JukeboxUI implements Listener {
             if(b.getType() == Material.JUKEBOX){
                 event.setCancelled(true);
                 Jukebox jfirst = (Jukebox) event.getClickedBlock().getState();
+                Location jLoc = event.getClickedBlock().getLocation();
+                if(jukeboxHologram.containsKey(jLoc)){
+                    Hologram hologram = jukeboxHologram.get(jLoc);
+                    hologram.delete();
+                    jukeboxHologram.remove(jLoc);
+                }
                 jfirst.setPlaying(null);
-                event.getClickedBlock().setType(Material.AIR);
-                event.getClickedBlock().setType(Material.JUKEBOX);
+                jfirst.setType(Material.AIR);
+                jfirst.setType(Material.JUKEBOX);
                 Jukebox j = (Jukebox) event.getClickedBlock().getState();
                 int rp = DataClass.resourcePack.get(p.getName());
                 if(rp != 0) {
@@ -79,6 +88,19 @@ public class JukeboxUI implements Listener {
     }
 
     @EventHandler
+    public void onBlockBreak(BlockBreakEvent event){
+        Block block = event.getBlock();
+        if(block.getType() == Material.JUKEBOX) {
+            Location loc = event.getBlock().getLocation();
+            if(jukeboxHologram.containsKey(loc)){
+                Hologram hologram = jukeboxHologram.get(loc);
+                hologram.delete();
+                jukeboxHologram.remove(loc);
+            }
+        }
+    }
+
+    @EventHandler
     public void onInventoryClick(InventoryClickEvent event){
         Inventory inv = event.getInventory();
 
@@ -93,6 +115,23 @@ public class JukeboxUI implements Listener {
         }
 
         Jukebox j = jukeboxPlayer.get(p.getName());
+        Location jLoc = j.getLocation();
+        Hologram hologram = HologramsAPI.createHologram(Main.getPlugin(), j.getLocation().add(0.5, 1.9, 0.5));
+
+        StringBuilder topLine = new StringBuilder();
+        for(int i = 1; i<=7; i++){
+            if(i != 4){
+                topLine.append("&" + MiscUtils.randomColor() + "\u266B");
+            } else {
+                topLine.append("&8[&aJukebox&8]");
+            }
+        }
+
+        hologram.appendTextLine(MiscUtils.color(topLine.toString().trim()));
+        hologram.appendTextLine(MiscUtils.color("&9Now playing &8 \u00BB &a" + event.getCurrentItem().getItemMeta().getDisplayName() +
+                " &6(/rp " + DataClass.resourcePack.get(p.getName()) + ")"));
+        hologram.appendTextLine(MiscUtils.color("&9Played by &8 \u00BB " + p.getDisplayName()));
+        jukeboxHologram.put(jLoc, hologram);
         j.setPlaying(event.getCurrentItem().getType());
         ChatUtils.msgPlayerTag(p, "Jukebox", "Now playing: &6" + event.getCurrentItem().getItemMeta().getDisplayName());
         p.closeInventory();
@@ -101,6 +140,8 @@ public class JukeboxUI implements Listener {
         MiscUtils.shootFirework(j.getLocation().add(1, 0, 1), p.getWorld().getName());
         MiscUtils.shootFirework(j.getLocation().add(1, 0, 0), p.getWorld().getName());
         MiscUtils.shootFirework(j.getLocation().add(0, 0, 1), p.getWorld().getName());
+
+        PlayerUtils.shootItem(p, event.getCurrentItem().getType(), 10);
 
         int tick = 0;
         for(double y = 0; y <= 10; y += 0.1){

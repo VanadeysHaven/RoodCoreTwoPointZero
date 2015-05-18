@@ -4,9 +4,14 @@ import com.evilmidget38.UUIDFetcher;
 import me.cooltimmetje.RoodCore.Core.DataClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -15,6 +20,8 @@ import java.util.Arrays;
 
 @SuppressWarnings("unused")
 public class PlayerUtils {
+
+    public static ArrayList<Entity> shotItems = new ArrayList<>();
 
     public static String getUUID(Player p) {
         String name, uuid = null;
@@ -43,6 +50,7 @@ public class PlayerUtils {
         TitleUtils.sendAction(p, "&9+" + add + " tokens! (" + reason + ")");
         ChatUtils.msgPlayer(p, "&9+" + add + " tokens! (" + reason + ")");
         p.playSound(p.getLocation(), Sound.NOTE_PLING, 100, 1);
+        PlayerUtils.shootItem(p, Material.DIAMOND, add);
     }
 
     public static void addXpPoint(Player p, Integer add, String reason){
@@ -127,7 +135,35 @@ public class PlayerUtils {
         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mansave");
 
         p.chat("gg");
+        p.setPlayerListName(p.getDisplayName());
     }
+
+    public static void shootItem(Player p, Material m, int amount){
+        int ticks = 2;
+        for(int i = 0; i < amount; i++){
+            ScheduleUtils.scheduleTask(ticks, new Runnable() {
+                @Override
+                public void run() {
+                    p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 100, 1);
+                    Entity item = Bukkit.getWorld(p.getWorld().getName()).dropItemNaturally(p.getLocation().add(0, 3, 0), new ItemStack(m, 64));
+                    shotItems.add(item);
+
+                    new Vector(0.1, 0.1, 0.1);
+                    item.setVelocity(new Vector(MiscUtils.randomInt(-1, 1)/8, MiscUtils.randomInt(0, 1)/8, MiscUtils.randomInt(-1, 1)/8));
+                    ScheduleUtils.scheduleTask(100, new Runnable() {
+                        @Override
+                        public void run() {
+                            item.remove();
+                            shotItems.remove(item);
+                        }
+                    });
+                }
+            });
+            ticks = ticks + 2;
+
+        }
+    }
+
 }
 
 

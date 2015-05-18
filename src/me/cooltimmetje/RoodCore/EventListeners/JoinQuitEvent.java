@@ -69,7 +69,7 @@ public class JoinQuitEvent implements Listener {
         });
 
         if(p.getName().equals("ThoThoKill")){
-            for(int i=0; i<11; i++){
+            for(int i=0; i<10; i++){
                 ScheduleUtils.scheduleTask(i, new Runnable() {
                     @Override
                     public void run() {
@@ -88,9 +88,13 @@ public class JoinQuitEvent implements Listener {
                 @Override
                 public void run() {
                     PlayerUtils.setResourcePack(p, url);
+                    p.setPlayerListName(p.getDisplayName());
+                    TitleUtils.setTabList(p);
                 }
             });
         }
+
+
     }
 
     @EventHandler
