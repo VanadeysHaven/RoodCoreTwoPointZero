@@ -3,6 +3,7 @@ package me.cooltimmetje.RoodCore;
 import me.cooltimmetje.RoodCore.Commands.*;
 import me.cooltimmetje.RoodCore.Core.DataClass;
 import me.cooltimmetje.RoodCore.Core.Rankup;
+import me.cooltimmetje.RoodCore.Core.UpdatesBoard;
 import me.cooltimmetje.RoodCore.EventListeners.JoinQuitEvent;
 import me.cooltimmetje.RoodCore.EventListeners.PickupManager;
 import me.cooltimmetje.RoodCore.EventListeners.ResourcePackEvent;
@@ -59,11 +60,14 @@ public class Main extends JavaPlugin {
         DataClass.setResourceList();
         DataClass.setColorCodes();
         DataClass.listRanks();
+        DataClass.listUpdates();
+        UpdatesBoard.updateBoard();
     }
 
     @Override
     public void onDisable(){
         Bukkit.getScheduler().cancelAllTasks();
+        UpdatesBoard.removeHologram();
         MiscUtils.removeAllJukeboxHologram();
         MiscUtils.despawnItems();
         for(Player p : Bukkit.getOnlinePlayers()) {

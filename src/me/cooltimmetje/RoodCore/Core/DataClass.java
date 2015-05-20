@@ -24,6 +24,7 @@ public class DataClass {
     public static HashMap<Integer, String> idName = new HashMap<>();
     public static HashMap<Integer, String> idColor = new HashMap<>();
     public static HashMap<Integer, String> colorCodes = new HashMap<>();
+    public static HashMap<Integer, String> updates = new HashMap<>();
 
     public static int tokensIncrement = 20;
     public static int tokenDoubleChance = 10;
@@ -90,7 +91,7 @@ public class DataClass {
         resource3.put("RECORD_4", "James Bay - Hold Back The River");
         resource3.put("RECORD_5", "Steve Angello - The Power [Live at Ultra Miami 2015]");
         resource3.put("RECORD_6", "Michael Calfan - Treasured Soul (Kryder and Genairo Nvilla Remix)");
-//        resource3.put("RECORD_7", "Pegboard Nerds - Hero (ft. Elizaveta)[Stonebank Remix]");
+        resource3.put("RECORD_7", "Tim Berg - Bromance (Avicii's Arena Mix)");
 //        resource3.put("RECORD_8", "Hellberg - The Girl (feat. Cozi Zuehlsdorff)");
 //        resource3.put("RECORD_9", "Muzzy - Get Crazy");
 //        resource3.put("RECORD_10", "Echosmith - Cool Kids");
@@ -161,6 +162,9 @@ public class DataClass {
             nameID.put("Earth", 40);
             nameID.put("EarthPlus",41);
             nameID.put("EarthPlusPlus", 42);
+            nameID.put("Water", 43);
+            nameID.put("WaterPlus", 44);
+            nameID.put("WaterPlusPlus", 45);
 
         }
         if (idName.isEmpty()) {
@@ -206,6 +210,9 @@ public class DataClass {
             idName.put(40, "Earth");
             idName.put(41, "EarthPlus");
             idName.put(42, "EarthPlusPlus");
+            idName.put(43, "Water");
+            idName.put(44, "WaterPlus");
+            idName.put(45, "WaterPlusPlus");
         }
         if (idColor.isEmpty()) {
             idColor.put(1, "&8[&7User&8]");
@@ -250,7 +257,23 @@ public class DataClass {
             idColor.put(40, "&8[&2Earth&8]");
             idColor.put(41, "&8[&2Earth&6+&8]");
             idColor.put(42, "&8[&2Earth&6+&c+&8]");
+            idColor.put(43, "&8[&9Water&8]");
+            idColor.put(44, "&8[&9Water&6+&8]");
+            idColor.put(45, "&8[&9Water&6+&c+&8]");
         }
+    }
+
+    public static void listUpdates() {
+        updates.put(1, "+ This board now \nshows the \nupdates \nautomagically!");
+        updates.put(2, "+ Diamonds now \nshoot from your \nhead when you \ngain tokens!");
+        updates.put(3, "+ New song! (rp 3) \nTim Berg - Bromance (Aviciis \nArena Remix)");
+        updates.put(4, "+ New staff \nmember! Reges is \nnow a MOD");
+        updates.put(5, "/ Our IP has \nchanged! Ask \nCooltimmetje for \nthe new one!");
+        updates.put(6, "+ Its ThoThoKill's \nBirthday!");
+        updates.put(7, "= Fix that it is \nThoThoKill's \nBirthday.");
+        updates.put(8, "! Its ThoThoKill's \nBirthday.");
+        updates.put(9, "+ New Ranks: \n&9Water \n&9Water&6+ \n&9Water&6+&c+");
+        updates.put(10, "+ A Hologram for \nthis board!");
     }
 
 }

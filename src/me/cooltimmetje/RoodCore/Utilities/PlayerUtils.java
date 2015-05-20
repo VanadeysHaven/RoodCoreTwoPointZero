@@ -147,9 +147,8 @@ public class PlayerUtils {
                     p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 100, 1);
                     Entity item = Bukkit.getWorld(p.getWorld().getName()).dropItemNaturally(p.getLocation().add(0, 3, 0), new ItemStack(m, 64));
                     shotItems.add(item);
-
-                    new Vector(0.1, 0.1, 0.1);
-                    item.setVelocity(new Vector(MiscUtils.randomInt(-1, 1)/8, MiscUtils.randomInt(0, 1)/8, MiscUtils.randomInt(-1, 1)/8));
+                    
+                    item.setVelocity(new Vector(MiscUtils.randomInt(-1, 1)/5, MiscUtils.randomInt(0, 1)/5, MiscUtils.randomInt(-1, 1)/5));
                     ScheduleUtils.scheduleTask(100, new Runnable() {
                         @Override
                         public void run() {
