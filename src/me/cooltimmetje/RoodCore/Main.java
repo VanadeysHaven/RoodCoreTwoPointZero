@@ -9,6 +9,7 @@ import me.cooltimmetje.RoodCore.EventListeners.PickupManager;
 import me.cooltimmetje.RoodCore.EventListeners.ResourcePackEvent;
 import me.cooltimmetje.RoodCore.MysqlManager.Database;
 import me.cooltimmetje.RoodCore.Timers.Announce;
+import me.cooltimmetje.RoodCore.Timers.Chests;
 import me.cooltimmetje.RoodCore.Timers.DataSaving;
 import me.cooltimmetje.RoodCore.Timers.Tokens;
 import me.cooltimmetje.RoodCore.UserInterfaces.JukeboxUI;
@@ -52,6 +53,7 @@ public class Main extends JavaPlugin {
 
         Announce.announcer();
         Tokens.tokensGiver();
+        Chests.chestsGiver();
         DataSaving.dataSaver();
         DataClass.setResourceURL();
         DataClass.setResource1();
@@ -60,7 +62,7 @@ public class Main extends JavaPlugin {
         DataClass.setResourceList();
         DataClass.setColorCodes();
         DataClass.listRanks();
-        DataClass.listUpdates();
+        DataClass.setUpdatesList();
         UpdatesBoard.updateBoard();
     }
 

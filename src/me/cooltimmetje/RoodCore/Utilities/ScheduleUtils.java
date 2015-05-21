@@ -12,4 +12,8 @@ public class ScheduleUtils {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), runnable, ticks);
     }
 
+    public static void repeatTask(long timeBeforeStart, long interval, Runnable runnable){
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(), runnable, timeBeforeStart, interval);
+    }
+
 }

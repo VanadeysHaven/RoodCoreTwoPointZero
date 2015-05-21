@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
+import org.bukkit.entity.Player;
 
 /**
  * This class has been created on 20-5-2015 at 19:45 by cooltimmetje.
@@ -46,6 +47,10 @@ public class UpdatesBoard {
                 Bukkit.getWorld("Survival").getBlockAt(x, y, z).setData((byte)4);
                 Sign sign = (Sign) Bukkit.getWorld("Survival").getBlockAt(x, y, z).getState();
                 if(DataClass.updates.get(update) != null){
+                    sign.setLine(0, " ");
+                    sign.setLine(1, " ");
+                    sign.setLine(2, " ");
+                    sign.setLine(3, " ");
                     String[] lines = DataClass.updates.get(update).split("\n");
                     for(int i = 0; i < lines.length; i++) {
                         sign.setLine(i, MiscUtils.color(lines[i].trim()));
@@ -65,6 +70,28 @@ public class UpdatesBoard {
                 update = update + 1;
             }
         }
+    }
+
+    public static void updateRecentRankup(Player p, String oldName, String newName){
+        for(int z = 221; z > 217; z--){
+            Sign signNew = (Sign) Bukkit.getWorld("Survival").getBlockAt(x, 73, z).getState();
+            Sign signOld = (Sign) Bukkit.getWorld("Survival").getBlockAt(x, 73, z-1).getState();
+
+            String[] lines = signOld.getLines();
+            for(int i = 0; i < lines.length; i++){
+                signNew.setLine(i, lines[i]);
+
+            }
+            signNew.update();
+        }
+        Bukkit.getWorld("Survival").getBlockAt(x, 73, 217).setType(Material.WALL_SIGN);
+        Bukkit.getWorld("Survival").getBlockAt(x, 73, 217).setData((byte)4);
+
+        Sign sign = (Sign) Bukkit.getWorld("Survival").getBlockAt(x, 73, 217).getState();
+        sign.setLine(0, p.getName());
+        sign.setLine(1, MiscUtils.color(oldName));
+        sign.setLine(3, MiscUtils.color(newName));
+        sign.update();
     }
 
     public static void removeHologram(){

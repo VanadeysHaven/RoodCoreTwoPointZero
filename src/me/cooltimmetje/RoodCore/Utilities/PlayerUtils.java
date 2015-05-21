@@ -2,6 +2,7 @@ package me.cooltimmetje.RoodCore.Utilities;
 
 import com.evilmidget38.UUIDFetcher;
 import me.cooltimmetje.RoodCore.Core.DataClass;
+import me.cooltimmetje.RoodCore.Core.UpdatesBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -71,6 +72,16 @@ public class PlayerUtils {
         p.playSound(p.getLocation(), Sound.NOTE_PLING, 100, 1);
     }
 
+    public static void addChest(Player p, Integer add, String reason){
+        int chestOld = DataClass.normalChests.get(p.getName());
+        int chestNew = chestOld + add;
+        DataClass.normalChests.put(p.getName(), chestNew);
+        TitleUtils.sendAction(p, "&e+" + add + " chests! (" + reason + ")");
+        ChatUtils.msgPlayer(p, "&e+" + add + " chests! (" + reason + ")");
+        p.playSound(p.getLocation(), Sound.NOTE_PLING, 100, 1);
+        PlayerUtils.shootItem(p, Material.CHEST, add);
+    }
+
     public static void removeTokens(Player p, Integer remove, String reason){
         int tokensOld = DataClass.tokens.get(p.getName());
         int tokensNew = tokensOld - remove;
@@ -136,6 +147,7 @@ public class PlayerUtils {
 
         p.chat("gg");
         p.setPlayerListName(p.getDisplayName());
+        UpdatesBoard.updateRecentRankup(p, curGroupColor, nextGroupColor);
     }
 
     public static void shootItem(Player p, Material m, int amount){
@@ -148,7 +160,7 @@ public class PlayerUtils {
                     Entity item = Bukkit.getWorld(p.getWorld().getName()).dropItemNaturally(p.getLocation().add(0, 3, 0), new ItemStack(m, 64));
                     shotItems.add(item);
                     
-                    item.setVelocity(new Vector(MiscUtils.randomInt(-1, 1)/5, MiscUtils.randomInt(0, 1)/5, MiscUtils.randomInt(-1, 1)/5));
+                    item.setVelocity(new Vector(MiscUtils.randomInt(-1, 1)/2, MiscUtils.randomInt(0, 1)/2, MiscUtils.randomInt(-1, 1)/2));
                     ScheduleUtils.scheduleTask(100, new Runnable() {
                         @Override
                         public void run() {

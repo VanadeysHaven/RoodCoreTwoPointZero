@@ -2,6 +2,7 @@ package me.cooltimmetje.RoodCore.Core;
 
 import org.bukkit.Material;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -25,14 +26,25 @@ public class DataClass {
     public static HashMap<Integer, String> idColor = new HashMap<>();
     public static HashMap<Integer, String> colorCodes = new HashMap<>();
     public static HashMap<Integer, String> updates = new HashMap<>();
+    public static HashMap<String, Integer> chestsTime = new HashMap<>();
+    public static HashMap<String, Integer> normalChests = new HashMap<>();
+
+    public static ArrayList<String> updatesList = new ArrayList<>();
 
     public static int tokensIncrement = 20;
     public static int tokenDoubleChance = 10;
     public static int tokenTripleChance = 1;
     public static int tokenTime = 15;
+
     public static int announceTicks = 6000;
     public static int announceStrings = 5;
     public static int rankupCost = 300;
+
+    public static int chestTime = 60;
+    public static int chestIncrement = 1;
+    public static int chestDoubleChance = 10;
+    public static int chestTripeChance = 1;
+
 
     public static void setAnnounce() {
         announce.put(1, "Your profile is saved every 10 minutes, or when you leave.");
@@ -263,17 +275,33 @@ public class DataClass {
         }
     }
 
-    public static void listUpdates() {
-        updates.put(1, "+ This board now \nshows the \nupdates \nautomagically!");
-        updates.put(2, "+ Diamonds now \nshoot from your \nhead when you \ngain tokens!");
-        updates.put(3, "+ New song! (rp 3) \nTim Berg - Bromance (Aviciis \nArena Remix)");
-        updates.put(4, "+ New staff \nmember! Reges is \nnow a MOD");
-        updates.put(5, "/ Our IP has \nchanged! Ask \nCooltimmetje for \nthe new one!");
-        updates.put(6, "+ Its ThoThoKill's \nBirthday!");
-        updates.put(7, "= Fix that it is \nThoThoKill's \nBirthday.");
-        updates.put(8, "! Its ThoThoKill's \nBirthday.");
-        updates.put(9, "+ New Ranks: \n&9Water \n&9Water&6+ \n&9Water&6+&c+");
-        updates.put(10, "+ A Hologram for \nthis board!");
+    private static void listUpdates(){
+        int i = 1;
+        for(String s : updatesList){
+            updates.put(i, s);
+            i = i + 1;
+        }
+    }
+
+    public static void setUpdatesList() {
+        updatesList.add("* The issue where \nyou could pickup \nshot items after \nrelogging is gone!");
+        updatesList.add("+ You can now see \nthe 5 most recent \nrankups below!");
+        updatesList.add("+ You now gain \nMystery Chests \nevery hour!");
+        updatesList.add("/ The way this \nboard now works \nin the code allows \nfor easier change");
+        updatesList.add("* Fixed a bug \nwhere this \nboard would not \nupdate properly");
+        updatesList.add("/ Tweaked the \nvelocity of shot \nitems a bit");
+        updatesList.add("/ The albums from \nJukeboxes now \nshoot from the \nJukebox itself.");
+        updatesList.add("+ This board now \nshows the \nupdates \nautomagically!");
+        updatesList.add("+ Diamonds now \nshoot from your \nhead when you \ngain tokens!");
+        updatesList.add("+ New song! (rp 3) \nTim Berg - Bromance (Aviciis \nArena Remix)");
+        updatesList.add("+ New staff \nmember! Reges is \nnow a MOD");
+        updatesList.add("/ Our IP has \nchanged! Ask \nCooltimmetje for \nthe new one!");
+        updatesList.add("* The issue with \nThoThoKill's \nbirthday has been \nresolved.");
+        updatesList.add("- ThoThoKill's \nBirthday!");
+        updatesList.add("+ New Ranks: \n&9Water \n&9Water&6+ \n&9Water&6+&c+");
+        updatesList.add("+ A Hologram for \nthis board!");
+
+        listUpdates();
     }
 
 }

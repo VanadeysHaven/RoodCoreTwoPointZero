@@ -141,7 +141,7 @@ public class JukeboxUI implements Listener {
         MiscUtils.shootFirework(j.getLocation().add(1, 0, 0), p.getWorld().getName());
         MiscUtils.shootFirework(j.getLocation().add(0, 0, 1), p.getWorld().getName());
 
-        PlayerUtils.shootItem(p, event.getCurrentItem().getType(), 10);
+        WorldUtils.shootItem(j.getLocation().add(0.5,1.1,0.5), event.getCurrentItem().getType(), 10);
 
         int tick = 0;
         for(double y = 0; y <= 10; y += 0.1){
