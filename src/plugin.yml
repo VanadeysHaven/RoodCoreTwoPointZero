@@ -20,3 +20,5 @@ commands:
         description: masstokens
     rankup:
         description: rankup
+    chests:
+        description: chests

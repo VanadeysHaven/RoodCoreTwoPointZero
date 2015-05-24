@@ -2,6 +2,7 @@ package me.cooltimmetje.RoodCore;
 
 import me.cooltimmetje.RoodCore.Commands.*;
 import me.cooltimmetje.RoodCore.Core.DataClass;
+import me.cooltimmetje.RoodCore.Core.MysteryChests.ChestChooseUI;
 import me.cooltimmetje.RoodCore.Core.Rankup;
 import me.cooltimmetje.RoodCore.Core.UpdatesBoard;
 import me.cooltimmetje.RoodCore.EventListeners.JoinQuitEvent;
@@ -35,7 +36,8 @@ public class Main extends JavaPlugin {
         plugin = this;
         Database.connectToDatabase();
 
-        registerEvents(this, new JoinQuitEvent(), new ResourcePackEvent(), new JukeboxUI(), new Rankup(), new PickupManager(), new TimeRainUI());
+        registerEvents(this, new JoinQuitEvent(), new ResourcePackEvent(), new JukeboxUI(), new Rankup(), new PickupManager(), new TimeRainUI(),
+                new ChestChooseUI());
         getCommand("tokens").setExecutor(new TokensCommand());
         getCommand("xp").setExecutor(new ExperienceSystem());
         getCommand("rp").setExecutor(new ResourcePackCommand());
@@ -44,6 +46,7 @@ public class Main extends JavaPlugin {
         getCommand("swaggergear").setExecutor(new SwaggerGear());
         getCommand("masstokens").setExecutor(new MassTokens());
         getCommand("rankup").setExecutor(new Rankup());
+        getCommand("chests").setExecutor(new ChestChooseUI());
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             Database.loadData(p);
