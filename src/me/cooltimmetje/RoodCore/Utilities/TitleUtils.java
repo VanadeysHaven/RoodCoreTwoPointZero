@@ -53,8 +53,8 @@ import java.util.List;
         return new TitleAnimation(title, subtitle);
     }
 
-    public static void setTabList(Player p) {
 
+    public static void setTabList(Player p) {
         StringBuilder topLine = new StringBuilder();
         for(int i = 1; i<=7; i++){
             if(i != 4){
@@ -69,8 +69,9 @@ import java.util.List;
         }
 
         String header = topLine.toString().trim() + "\n&aPlayers online: &8(&6" + Bukkit.getOnlinePlayers().size() + "&8/&6" + Bukkit.getMaxPlayers() + "&8)";
-        String footer = p.getDisplayName() + " &b- &9" + DataClass.tokens.get(p.getName()) + " tokens\n&d" + DataClass.experiencePoint.get(p.getName()) + " XP Points &b- &eResourcePack " +
-                DataClass.resourcePack.get(p.getName());
+        String footer = "&6Welcome, " + p.getDisplayName() + "\n" +
+                "&9" + DataClass.tokens.get(p.getName()) + " tokens &b- &d" + DataClass.experiencePoint.get(p.getName()) + " XP Points \n" +
+                "&3ResourcePack " + DataClass.resourcePack.get(p.getName()) + " &b- &e" + DataClass.normalChests.get(p.getName()) + " chests";
         new TabTitleObject(MiscUtils.color(header), MiscUtils.color(footer)).send(p);
     }
 }

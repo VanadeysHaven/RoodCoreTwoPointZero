@@ -1,6 +1,7 @@
 package me.cooltimmetje.RoodCore.Core;
 
 import org.bukkit.Material;
+import org.bukkit.event.entity.EntityPortalEnterEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -284,6 +285,9 @@ public class DataClass {
     }
 
     public static void setUpdatesList() {
+        updatesList.add("+ You can now see \nthe amount of \nchests you have in \nthe TAB list.");
+        updatesList.add("/ Shooting items \nhave been temp \ndisabled due to \na unfixable bug.");
+        updatesList.add("+ You can now \nchange the time \nand weather by \nRClicking a clock!");
         updatesList.add("* The issue where \nyou could pickup \nshot items after \nrelogging is gone!");
         updatesList.add("+ You can now see \nthe 5 most recent \nrankups below!");
         updatesList.add("+ You now gain \nMystery Chests \nevery hour!");
@@ -303,5 +307,7 @@ public class DataClass {
 
         listUpdates();
     }
+
+
 
 }

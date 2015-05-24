@@ -68,17 +68,6 @@ public class JoinQuitEvent implements Listener {
             }
         });
 
-        if(p.getName().equals("ThoThoKill")){
-            for(int i=0; i<10; i++){
-                ScheduleUtils.scheduleTask(i, new Runnable() {
-                    @Override
-                    public void run() {
-                        ChatUtils.broadcastTag("Rood", "&4&lHA! ROOD!");
-                    }
-                });
-            }
-        }
-
         int pack = DataClass.resourcePack.get(p.getName());
         String url = DataClass.resourceURL.get(pack);
         if(url != null){

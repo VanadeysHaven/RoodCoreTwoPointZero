@@ -31,7 +31,6 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        long load = System.currentTimeMillis();
         this.saveDefaultConfig();
         plugin = this;
         Database.connectToDatabase();
@@ -66,7 +65,6 @@ public class Main extends JavaPlugin {
         DataClass.setUpdatesList();
         UpdatesBoard.updateBoard();
 
-        load = load - System.currentTimeMillis();
     }
 
     @Override
