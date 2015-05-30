@@ -20,7 +20,10 @@ public class InventoryUtils {
         }
         if(!(lore == null)){
             ArrayList<String> Lore = new ArrayList<>();
-            Lore.add(MiscUtils.color(lore));
+            String[] loreArray = lore.split("\n");
+            for(int i = 0; i < loreArray.length; i++) {
+                Lore.add(MiscUtils.color(loreArray[i]));
+            }
             itemMeta.setLore(Lore);
         }
         item.setItemMeta(itemMeta);
