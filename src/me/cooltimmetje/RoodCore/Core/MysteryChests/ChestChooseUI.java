@@ -72,9 +72,9 @@ public class ChestChooseUI implements CommandExecutor,Listener {
                 p.playSound(p.getLocation(), Sound.ITEM_BREAK, 100, 1);
                 break;
             case CHEST:
-                ChatUtils.msgPlayerTodo(p, "Add chest opening GUI");
-                p.closeInventory();
-                p.playSound(p.getLocation(), Sound.ITEM_BREAK, 100, 1);
+                NormalChestOpening.openNormal(p);
+                int chest = DataClass.normalChests.get(p.getName());
+                DataClass.normalChests.put(p.getName(), chest - 1);
                 break;
             default:
                 break;

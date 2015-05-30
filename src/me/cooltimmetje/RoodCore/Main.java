@@ -3,6 +3,7 @@ package me.cooltimmetje.RoodCore;
 import me.cooltimmetje.RoodCore.Commands.*;
 import me.cooltimmetje.RoodCore.Core.DataClass;
 import me.cooltimmetje.RoodCore.Core.MysteryChests.ChestChooseUI;
+import me.cooltimmetje.RoodCore.Core.MysteryChests.NormalChestOpening;
 import me.cooltimmetje.RoodCore.Core.Rankup;
 import me.cooltimmetje.RoodCore.Core.UpdatesBoard;
 import me.cooltimmetje.RoodCore.EventListeners.JoinQuitEvent;
@@ -37,7 +38,7 @@ public class Main extends JavaPlugin {
         Database.connectToDatabase();
 
         registerEvents(this, new JoinQuitEvent(), new ResourcePackEvent(), new JukeboxUI(), new Rankup(), new PickupManager(), new TimeRainUI(),
-                new ChestChooseUI());
+                new ChestChooseUI(), new NormalChestOpening());
         getCommand("tokens").setExecutor(new TokensCommand());
         getCommand("xp").setExecutor(new ExperienceSystem());
         getCommand("rp").setExecutor(new ResourcePackCommand());
