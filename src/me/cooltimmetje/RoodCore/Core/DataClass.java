@@ -47,6 +47,7 @@ public class DataClass {
     public static int chestIncrement = 1;
     public static int chestDoubleChance = 10;
     public static int chestTripeChance = 1;
+    public static int chestCost = 75;
 
 
     public static void setAnnounce() {

@@ -3,6 +3,7 @@ package me.cooltimmetje.RoodCore.Core.MysteryChests;
 import me.cooltimmetje.RoodCore.Core.DataClass;
 import me.cooltimmetje.RoodCore.Utilities.ChatUtils;
 import me.cooltimmetje.RoodCore.Utilities.InventoryUtils;
+import me.cooltimmetje.RoodCore.Utilities.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -54,7 +55,7 @@ public class ChestChooseUI implements CommandExecutor,Listener {
             slot++;
         }
 
-        InventoryUtils.createDisplay(Material.GOLD_NUGGET, 1, 0, "&aChest Shop &3(Coming soon)", "&3You get chests every hour,\n" +
+        InventoryUtils.createDisplay(Material.GOLD_NUGGET, 1, 0, "&aChest Shop", "&3You get chests every hour,\n" +
                 "&3but if you want some more:\n" +
                 "&3Buy them here!", inv, 53);
         InventoryUtils.createDisplay(Material.WORKBENCH, 1, 0, "&aChest Crafting",
@@ -78,18 +79,18 @@ public class ChestChooseUI implements CommandExecutor,Listener {
 
         switch (event.getCurrentItem().getType()){
             case GOLD_NUGGET:
-                ChatUtils.msgPlayerTag(p, "Chests", "Chest shop is coming soon!");
-                p.closeInventory();
-                p.playSound(p.getLocation(), Sound.ITEM_BREAK, 100, 1);
+                ChestsShop.openChest(p);
                 break;
             case WORKBENCH:
                 ChestCrafting.openCraft(p);
                 break;
             case CHEST:
                 NormalChestOpening.openNormal(p);
-                int chest = DataClass.normalChests.get(p.getName());
-                DataClass.normalChests.put(p.getName(), chest - 1);
+                PlayerUtils.removeChest(p, 1, "opened a normal chest");
                 break;
+            case TRAPPED_CHEST:
+                EpicChestOpening.openEpic(p);
+                PlayerUtils.removeEpic(p, 1, "opened a epic chest");
             default:
                 break;
         }

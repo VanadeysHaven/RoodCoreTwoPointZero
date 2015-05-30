@@ -127,7 +127,7 @@ public class NormalChestOpening implements Listener {
 
     private void rollSlot(Player p, int slot, Inventory inventory) {
         String[] items;
-        items = new String[85];
+        items = new String[140];
 
         int index = 0;
         for(int i = 0; i < 20; i++){
@@ -144,6 +144,12 @@ public class NormalChestOpening implements Listener {
         }
         for(int i = 0; i < 5; i++){
             items[index++] = "armorstand";
+        }
+        for(int i = 0; i < 35; i++){
+            items[index++] = "lapis";
+        }
+        for(int i = 0; i < 20; i++){
+            items[index++] = "redstone";
         }
 
         for (int i = 0; i < 50; i++) {
@@ -166,6 +172,10 @@ public class NormalChestOpening implements Listener {
                         InventoryUtils.createDisplay(Material.IRON_INGOT, MiscUtils.randomInt(1, 24), 0, "&3IRON!", null, inventory, slotFinal);
                     } else if (item.equals("armorstand")){
                         InventoryUtils.createDisplay(Material.ARMOR_STAND, 1, 0, "&aArmor Stand customization!", null, inventory, slotFinal);
+                    } else if (item.equals("lapis")){
+                        InventoryUtils.createDisplay(Material.INK_SACK, MiscUtils.randomInt(1, 32), 4, "&9LAPIS!", null, inventory, slotFinal);
+                    } else if(item.equals("redstone")){
+                        InventoryUtils.createDisplay(Material.REDSTONE, MiscUtils.randomInt(1, 16), 0, "&cREDSTONE!", null, inventory, slotFinal);
                     }
 
                     if(times == 49){
@@ -188,7 +198,7 @@ public class NormalChestOpening implements Listener {
                         } else if(item.equals("gold")){
                             InventoryUtils.createDisplay(Material.GOLD_INGOT, MiscUtils.randomInt(1, 16), 0, "&6GOLD!", null, inventory, slotFinal);
                             Bukkit.getWorld(p.getWorld().getName()).dropItem(p.getLocation(), new ItemStack(Material.GOLD_INGOT, inventory.getItem(slot).getAmount()));
-                            if(inventory.getItem(slot).getAmount() == 8){
+                            if(inventory.getItem(slot).getAmount() == 16){
                                 ChatUtils.broadcastTag("Chests", p.getDisplayName() + "&b found &6&l" + inventory.getItem(slot).getAmount() + " gold" + " &bin a &e&lNormal Chest&b!");
                             }
                         } else if (item.equals("iron")){
@@ -212,6 +222,15 @@ public class NormalChestOpening implements Listener {
                                     ChatUtils.broadcastTag("Chests", p.getDisplayName() + "&b found &9&l" + tokens + " tokens" + " &bin a &e&lNormal Chest&b!");
                                 }
                             }
+                        } else if (item.equals("lapis")){
+                            InventoryUtils.createDisplay(Material.INK_SACK, MiscUtils.randomInt(1, 32), 4, "&9LAPIS!", null, inventory, slotFinal);
+                            Bukkit.getWorld(p.getWorld().getName()).dropItem(p.getLocation(), new ItemStack(Material.INK_SACK, inventory.getItem(slot).getAmount(), (byte) 4));
+                            if(inventory.getItem(slot).getAmount() == 32){
+                                ChatUtils.broadcastTag("Chests", p.getDisplayName() + "&b found &9&l" + inventory.getItem(slot).getAmount() + " lapis" + " &bin a &e&lNormal Chest&b!");
+                            }
+                        } else if(item.equals("redstone")){
+                            InventoryUtils.createDisplay(Material.REDSTONE, MiscUtils.randomInt(1, 16), 0, "&cREDSTONE!", null, inventory, slotFinal);
+                            Bukkit.getWorld(p.getWorld().getName()).dropItem(p.getLocation(), new ItemStack(Material.REDSTONE, inventory.getItem(slot).getAmount()));
                         }
                     }
                 }
