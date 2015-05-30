@@ -117,6 +117,7 @@ public class NormalChestOpening implements Listener {
                 event.getInventory().setItem(event.getSlot(), new ItemStack(Material.AIR));
                 if(MiscUtils.randomInt(0, 100) <= 5){
                     PlayerUtils.addTokens(p, 1, "The insurance paid for this broken glass!");
+                    InventoryUtils.createDisplay(Material.GOLD_NUGGET, 1, 0, "&91 token", "&9(insurance payout)", event.getInventory(), event.getSlot() + 1);
                 }
                  break;
             default:
@@ -199,11 +200,12 @@ public class NormalChestOpening implements Listener {
                         } else if (item.equals("armorstand")){
                             InventoryUtils.createDisplay(Material.ARMOR_STAND, 1, 0, "&aArmorStand customization!", null, inventory, slotFinal);
                             if(!p.hasPermission("roodcore.armorstand")) {
-                                ChatUtils.broadcastTag("Chests", p.getDisplayName() + "&b found " + inventory.getItem(slot).getAmount() + "&a&lArmorStand customization" + " &bin a &e&lNormal Chest&b!");
+                                ChatUtils.broadcastTag("Chests", p.getDisplayName() + "&b found &a&lArmorStand customization" + " &bin a &e&lNormal Chest&b!");
                                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " roodcore.armorstand");
                                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mansave");
                             } else {
                                 int tokens = MiscUtils.randomInt(20, 100);
+                                ChatUtils.msgPlayerTag(p, "Chests", "You found a item you already have! So you got &9" + tokens + "tokens &ainstead!");
                                 InventoryUtils.createDisplay(Material.GOLD_NUGGET, 1, 0, "&9" + tokens + " tokens", null, inventory, slotFinal);
                                 PlayerUtils.addTokens(p, tokens, "found in a normal chest");
                                 if(tokens == 100){

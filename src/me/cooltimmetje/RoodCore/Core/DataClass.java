@@ -29,6 +29,8 @@ public class DataClass {
     public static HashMap<Integer, String> updates = new HashMap<>();
     public static HashMap<String, Integer> chestsTime = new HashMap<>();
     public static HashMap<String, Integer> normalChests = new HashMap<>();
+    public static HashMap<String, Integer> epicChest = new HashMap<>();
+    public static HashMap<String, Integer> legendChest = new HashMap<>();
 
     public static ArrayList<String> updatesList = new ArrayList<>();
 

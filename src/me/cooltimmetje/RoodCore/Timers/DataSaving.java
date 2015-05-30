@@ -17,6 +17,7 @@ public class DataSaving {
                 for(Player p : Bukkit.getOnlinePlayers()){
                     Database.saveData(p);
                 }
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "save-all");
             }
         }, 12000, 12000);
     }

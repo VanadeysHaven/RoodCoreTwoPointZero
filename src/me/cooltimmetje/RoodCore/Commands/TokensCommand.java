@@ -1,16 +1,10 @@
 package me.cooltimmetje.RoodCore.Commands;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import me.cooltimmetje.RoodCore.Core.DataClass;
-import me.cooltimmetje.RoodCore.Main;
 import me.cooltimmetje.RoodCore.Utilities.ChatUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 /**

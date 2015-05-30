@@ -55,6 +55,8 @@ public class Database {
                 DataClass.resourcePack.put(p.getName(), rs.getInt("resource_pack"));
                 DataClass.normalChests.put(p.getName(), rs.getInt("normal_chests"));
                 DataClass.chestsTime.put(p.getName(), rs.getInt("chest_time"));
+                DataClass.epicChest.put(p.getName(), rs.getInt("epic_chest"));
+                DataClass.legendChest.put(p.getName(), rs.getInt("legend_chest"));
                 ChatUtils.msgPlayerTag(p, "Profile", "Profile loaded! &lWE DID IT! &a*dances*");
             } else {
                 ChatUtils.msgPlayerTag(p, "Profile", "You do not have a profile yet! So we will create one for you! This process will happen automagically with the use of" +
@@ -98,7 +100,7 @@ public class Database {
         PreparedStatement ps = null;
         ResultSet rs = null;
         String uuid = PlayerUtils.getUUID(p);
-        String update = "INSERT INTO playerdata VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE uuid=?";
+        String update = "INSERT INTO playerdata VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE uuid=?";
 
         try{
             c = hikari.getConnection();
@@ -113,7 +115,9 @@ public class Database {
             ps.setInt(7, 0);
             ps.setInt(8, 0);
             ps.setInt(9, DataClass.chestTime);
-            ps.setString(10, uuid);
+            ps.setInt(10, 0);
+            ps.setInt(11, 0);
+            ps.setString(12, uuid);
             ps.execute();
             ChatUtils.msgPlayerTag(p, "Profile", "Profile created! &lYaaay! &a*whoop whoop*");
         } catch (SQLException e){
@@ -146,8 +150,8 @@ public class Database {
         Connection c = null;
         PreparedStatement ps = null;
         String uuid = PlayerUtils.getUUID(p);
-        String update = "INSERT INTO playerdata VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE " +
-                "uuid=?,tokens=?,token_time=?,experience_point=?,resource_pack=?,normal_chests=?,chest_time=?";
+        String update = "INSERT INTO playerdata VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE " +
+                "tokens=?,token_time=?,experience_point=?,resource_pack=?,normal_chests=?,chest_time=?,epic_chest=?,legend_chest=?";
 //        String update = "UPDATE playerdata SET uuid=?,last_name=?,last_ip_adress=?,tokens=?,token_time=? WHERE 1";
         try{
             c = hikari.getConnection();
@@ -162,13 +166,17 @@ public class Database {
             ps.setInt(7, DataClass.resourcePack.get(p.getName()));
             ps.setInt(8, DataClass.normalChests.get(p.getName()));
             ps.setInt(9, DataClass.chestsTime.get(p.getName()));
-            ps.setString(10, uuid);
-            ps.setInt(11, DataClass.tokens.get(p.getName()));
-            ps.setInt(12, DataClass.tokensTime.get(p.getName()));
-            ps.setInt(13, DataClass.experiencePoint.get(p.getName()));
-            ps.setInt(14, DataClass.resourcePack.get(p.getName()));
-            ps.setInt(15, DataClass.normalChests.get(p.getName()));
-            ps.setInt(16, DataClass.chestsTime.get(p.getName()));
+            ps.setInt(10, DataClass.epicChest.get(p.getName()));
+            ps.setInt(11, DataClass.legendChest.get(p.getName()));
+
+            ps.setInt(12, DataClass.tokens.get(p.getName()));
+            ps.setInt(13, DataClass.tokensTime.get(p.getName()));
+            ps.setInt(14, DataClass.experiencePoint.get(p.getName()));
+            ps.setInt(15, DataClass.resourcePack.get(p.getName()));
+            ps.setInt(16, DataClass.normalChests.get(p.getName()));
+            ps.setInt(17, DataClass.chestsTime.get(p.getName()));
+            ps.setInt(18, DataClass.epicChest.get(p.getName()));
+            ps.setInt(19, DataClass.legendChest.get(p.getName()));
             ps.execute();
             new ActionbarTitleObject("\u00A79Profile> \u00A7aProfile saved!").send(p);
         } catch (SQLException e){

@@ -25,18 +25,16 @@ public class ChestChooseUI implements CommandExecutor,Listener {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         Player p = (Player) sender;
-        int chests = DataClass.normalChests.get(p.getName());
+        int normal = DataClass.normalChests.get(p.getName());
+        int epic = DataClass.epicChest.get(p.getName());
+        int legend = DataClass.legendChest.get(p.getName());
         if (cmd.getName().equalsIgnoreCase("chests")) {
-            if(chests != 0){
-                openChestChooser(p, chests);
-            } else {
-                ChatUtils.msgPlayerTag(p, "Chests", ChatUtils.error + "You need at least 1 chest to open one!");
-            }
+            openChestChooser(p, normal, epic, legend);
         }
         return true;
     }
 
-    private void openChestChooser(Player p, int chests) {
+    private void openChestChooser(Player p, int chests, int epic, int legend) {
         Inventory inv = Bukkit.createInventory(null, 54, "Chests");
 
         int slot = 1;
@@ -45,8 +43,21 @@ public class ChestChooseUI implements CommandExecutor,Listener {
 
             slot++;
         }
+        for(int i = 0; i < epic; i++){
+            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&5Epic Chest", "&3Click to open me.", inv, slot);
 
-        InventoryUtils.createDisplay(Material.WORKBENCH, 1, 0, "&eChest Crafting &3(Coming Soon)",
+            slot++;
+        }
+        for(int i = 0; i < legend; i++){
+            InventoryUtils.createDisplay(Material.ENDER_CHEST, 1, 0, "&cLegendary Chest", "&3Click to open me.", inv, slot);
+
+            slot++;
+        }
+
+        InventoryUtils.createDisplay(Material.GOLD_NUGGET, 1, 0, "&aChest Shop &3(Coming soon)", "&3You get chests every hour,\n" +
+                "&3but if you want some more:\n" +
+                "&3Buy them here!", inv, 53);
+        InventoryUtils.createDisplay(Material.WORKBENCH, 1, 0, "&aChest Crafting",
                 "&3Use chests to craft higher tiered chests, \n&3this means you can get better loot!", inv, 54);
 
         p.openInventory(inv);
@@ -66,10 +77,13 @@ public class ChestChooseUI implements CommandExecutor,Listener {
 
 
         switch (event.getCurrentItem().getType()){
-            case WORKBENCH:
-                ChatUtils.msgPlayerTag(p, "Chests", "Chest crafting is coming soon!");
+            case GOLD_NUGGET:
+                ChatUtils.msgPlayerTag(p, "Chests", "Chest shop is coming soon!");
                 p.closeInventory();
                 p.playSound(p.getLocation(), Sound.ITEM_BREAK, 100, 1);
+                break;
+            case WORKBENCH:
+                ChestCrafting.openCraft(p);
                 break;
             case CHEST:
                 NormalChestOpening.openNormal(p);

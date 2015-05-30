@@ -74,10 +74,60 @@ public class PlayerUtils {
         int chestOld = DataClass.normalChests.get(p.getName());
         int chestNew = chestOld + add;
         DataClass.normalChests.put(p.getName(), chestNew);
-        TitleUtils.sendAction(p, "&e+" + add + " chests! (" + reason + ")");
-        ChatUtils.msgPlayer(p, "&e+" + add + " chests! (" + reason + ")");
+        TitleUtils.sendAction(p, "&e+" + add + " normal chests! (" + reason + ")");
+        ChatUtils.msgPlayer(p, "&e+" + add + " normal chests! (" + reason + ")");
         p.playSound(p.getLocation(), Sound.NOTE_PLING, 100, 1);
         PlayerUtils.shootItem(p, Material.CHEST, add);
+    }
+
+    public static void removeChest(Player p, Integer remove, String reason){
+        int chestOld = DataClass.normalChests.get(p.getName());
+        int chestNew = chestOld - remove;
+        DataClass.normalChests.put(p.getName(), chestNew);
+        TitleUtils.sendAction(p, "&e-" + remove + " normal chests! (" + reason + ")");
+        ChatUtils.msgPlayer(p, "&e-" + remove + " normal chests! (" + reason + ")");
+        p.playSound(p.getLocation(), Sound.NOTE_PLING, 100, 1);
+        PlayerUtils.shootItem(p, Material.CHEST, remove);
+    }
+
+    public static void addEpic(Player p, Integer add, String reason){
+        int chestOld = DataClass.epicChest.get(p.getName());
+        int chestNew = chestOld + add;
+        DataClass.epicChest.put(p.getName(), chestNew);
+        TitleUtils.sendAction(p, "&5+" + add + " epic chests! (" + reason + ")");
+        ChatUtils.msgPlayer(p, "&5+" + add + " epic chests! (" + reason + ")");
+        p.playSound(p.getLocation(), Sound.NOTE_PLING, 100, 1);
+        PlayerUtils.shootItem(p, Material.CHEST, add);
+    }
+
+    public static void removeEpic(Player p, Integer remove, String reason){
+        int chestOld = DataClass.epicChest.get(p.getName());
+        int chestNew = chestOld - remove;
+        DataClass.epicChest.put(p.getName(), chestNew);
+        TitleUtils.sendAction(p, "&5-" + remove + " epic chests! (" + reason + ")");
+        ChatUtils.msgPlayer(p, "&5-" + remove + " epic chests! (" + reason + ")");
+        p.playSound(p.getLocation(), Sound.NOTE_PLING, 100, 1);
+        PlayerUtils.shootItem(p, Material.CHEST, remove);
+    }
+
+    public static void addLegend(Player p, Integer add, String reason){
+        int chestOld = DataClass.legendChest.get(p.getName());
+        int chestNew = chestOld + add;
+        DataClass.legendChest.put(p.getName(), chestNew);
+        TitleUtils.sendAction(p, "&c+" + add + " legendary chests! (" + reason + ")");
+        ChatUtils.msgPlayer(p, "&c+" + add + " legendary chests! (" + reason + ")");
+        p.playSound(p.getLocation(), Sound.NOTE_PLING, 100, 1);
+        PlayerUtils.shootItem(p, Material.CHEST, add);
+    }
+
+    public static void removeLegend(Player p, Integer remove, String reason){
+        int chestOld = DataClass.legendChest.get(p.getName());
+        int chestNew = chestOld - remove;
+        DataClass.legendChest.put(p.getName(), chestNew);
+        TitleUtils.sendAction(p, "&c-" + remove + " legendary chests! (" + reason + ")");
+        ChatUtils.msgPlayer(p, "&c-" + remove + " legendary chests! (" + reason + ")");
+        p.playSound(p.getLocation(), Sound.NOTE_PLING, 100, 1);
+        PlayerUtils.shootItem(p, Material.CHEST, remove);
     }
 
     public static void removeTokens(Player p, Integer remove, String reason){
