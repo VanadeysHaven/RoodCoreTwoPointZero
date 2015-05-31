@@ -41,6 +41,8 @@ public class ChestCrafting implements Listener {
         InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 4, 0, "&aCraft: &5&l4 Epic Chests", "&3Cost: &c&l1 Legendary Chest\n" +
                 "&3Click to craft", inv, 23);
 
+        InventoryUtils.createDisplay(Material.BARRIER, 1, 0, "&aGo Back", null, inv, 19);
+
         p.openInventory(inv);
     }
 
@@ -143,6 +145,10 @@ public class ChestCrafting implements Listener {
                 } else {
                     break;
                 }
+            case BARRIER:
+                ChestChooseUI.openChestChooser(p, DataClass.normalChests.get(p.getName()), DataClass.epicChest.get(p.getName()), DataClass.legendChest.get(p.getName()));
+                p.playSound(p.getLocation(), Sound.CLICK, 100, 1);
+                break;
             default:
                 break;
         }

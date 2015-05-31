@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class InventoryUtils {
 
-    public static void createDisplay(Material m, int amount, int data, String name, String lore, Inventory inv, int slotNumber){
+    public static void createDisplay(Material m, int amount, int data, String name, String lore, Inventory inv, int slot){
         ItemStack item = new ItemStack(m, amount,(byte) data);
         ItemMeta itemMeta = item.getItemMeta();
         if(!(name == null)){
@@ -27,8 +27,36 @@ public class InventoryUtils {
             itemMeta.setLore(Lore);
         }
         item.setItemMeta(itemMeta);
-        inv.setItem(slotNumber - 1, item);
+        inv.setItem(slot - 1, item);
     }
 
+    public static void createTrueFalse(boolean bool, String name, String lore, Inventory inv, int slot){
+        int data;
+        if(bool){
+            data = 10;
+        } else {
+            data = 8;
+        }
 
+        ItemStack item = new ItemStack(Material.INK_SACK, 1, (byte) data);
+        ItemMeta itemMeta = item.getItemMeta();
+        if(!(name == null)){
+            itemMeta.setDisplayName(MiscUtils.color(name + " &8\u00BB " + MiscUtils.formatBoolean(bool)));
+        }
+        if(!(lore == null)){
+            ArrayList<String> Lore = new ArrayList<>();
+            String[] loreArray = lore.split("\n");
+            for(int i = 0; i < loreArray.length; i++) {
+                Lore.add(MiscUtils.color(loreArray[i]));
+            }
+            Lore.add(MiscUtils.color("&3Click to toggle"));
+            itemMeta.setLore(Lore);
+        }
+        item.setItemMeta(itemMeta);
+        inv.setItem(slot - 1, item);
+    }
+
+    public static void createDisplay(ItemStack is, Inventory inv, int slot){
+        inv.setItem(slot - 1, is);
+    }
 }

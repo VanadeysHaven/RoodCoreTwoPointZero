@@ -1,10 +1,13 @@
 package me.cooltimmetje.RoodCore;
 
 import me.cooltimmetje.RoodCore.Commands.*;
+import me.cooltimmetje.RoodCore.Core.ArmorStandCustomization.Contents;
+import me.cooltimmetje.RoodCore.Core.ArmorStandCustomization.MainMenu;
 import me.cooltimmetje.RoodCore.Core.DataClass;
 import me.cooltimmetje.RoodCore.Core.MysteryChests.*;
 import me.cooltimmetje.RoodCore.Core.Rankup;
 import me.cooltimmetje.RoodCore.Core.UpdatesBoard;
+import me.cooltimmetje.RoodCore.EventListeners.ChatEvent;
 import me.cooltimmetje.RoodCore.EventListeners.JoinQuitEvent;
 import me.cooltimmetje.RoodCore.EventListeners.PickupManager;
 import me.cooltimmetje.RoodCore.EventListeners.ResourcePackEvent;
@@ -37,7 +40,8 @@ public class Main extends JavaPlugin {
         Database.connectToDatabase();
 
         registerEvents(this, new JoinQuitEvent(), new ResourcePackEvent(), new JukeboxUI(), new Rankup(), new PickupManager(), new TimeRainUI(),
-                new ChestChooseUI(), new NormalChestOpening(), new ChestCrafting(), new ChestsShop(), new EpicChestOpening());
+                new ChestChooseUI(), new NormalChestOpening(), new ChestCrafting(), new ChestsShop(), new EpicChestOpening(), new LegendChestOpening(),
+                new MainMenu(), new ChatEvent(), new Contents());
         getCommand("tokens").setExecutor(new TokensCommand());
         getCommand("xp").setExecutor(new ExperienceSystem());
         getCommand("rp").setExecutor(new ResourcePackCommand());
@@ -47,6 +51,7 @@ public class Main extends JavaPlugin {
         getCommand("masstokens").setExecutor(new MassTokens());
         getCommand("rankup").setExecutor(new Rankup());
         getCommand("chests").setExecutor(new ChestChooseUI());
+        getCommand("advantage").setExecutor(new ThomasCommand());
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             Database.loadData(p);

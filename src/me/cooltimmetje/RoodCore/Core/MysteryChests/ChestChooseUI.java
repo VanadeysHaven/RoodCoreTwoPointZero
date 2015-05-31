@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
 import java.util.List;
@@ -26,40 +27,42 @@ public class ChestChooseUI implements CommandExecutor,Listener {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         Player p = (Player) sender;
-        int normal = DataClass.normalChests.get(p.getName());
-        int epic = DataClass.epicChest.get(p.getName());
-        int legend = DataClass.legendChest.get(p.getName());
         if (cmd.getName().equalsIgnoreCase("chests")) {
-            openChestChooser(p, normal, epic, legend);
+            int normal = DataClass.normalChests.get(p.getName());
+            int epic = DataClass.epicChest.get(p.getName());
+            int legend = DataClass.legendChest.get(p.getName());
+                openChestChooser(p, normal, epic, legend);
         }
         return true;
     }
 
-    private void openChestChooser(Player p, int chests, int epic, int legend) {
-        Inventory inv = Bukkit.createInventory(null, 54, "Chests");
+    public static void openChestChooser(Player p, int chests, int epic, int legend) {
+        Inventory inv = Bukkit.createInventory(null, 36, "Chests");
 
-        int slot = 1;
-        for(int i = 0; i < chests; i++){
-            InventoryUtils.createDisplay(Material.CHEST, 1, 0, "&eNormal Chest", "&3Click to open me.", inv, slot);
-
-            slot++;
+        if(chests != 0) {
+            InventoryUtils.createDisplay(Material.CHEST, chests, 0, "&eNormal Chest &8\u00BB &b&lYou Have: " + chests, "&3Click to open me.", inv, 13);
+        } else {
+            InventoryUtils.createDisplay(Material.BARRIER, 1, 0, "&eNormal Chest &8\u00BB &b&lYou Have: " + chests, "&3You don't have any normal chests!", inv, 13);
         }
-        for(int i = 0; i < epic; i++){
-            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&5Epic Chest", "&3Click to open me.", inv, slot);
-
-            slot++;
+        if(epic != 0){
+            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, epic, 0, "&5Epic Chest &8\u00BB &b&lYou Have: " + epic, "&3Click to open me.", inv, 14);
+        } else {
+            InventoryUtils.createDisplay(Material.BARRIER, 1, 0, "&5Epic Chest &8\u00BB &b&lYou Have: " + epic, "&3You don't have any epic chests!", inv, 14);
         }
-        for(int i = 0; i < legend; i++){
-            InventoryUtils.createDisplay(Material.ENDER_CHEST, 1, 0, "&cLegendary Chest", "&3Click to open me.", inv, slot);
-
-            slot++;
+        if(legend != 0){
+            InventoryUtils.createDisplay(Material.ENDER_CHEST, legend, 0, "&cLegendary Chest &8\u00BB &b&lYou Have: " + legend, "&3Click to open me.", inv, 15);
+        } else {
+            InventoryUtils.createDisplay(Material.BARRIER, 1, 0, "&cLegendary Chest &8\u00BB &b&lYou Have: " + legend, "&3You don't have any legendary chests!", inv, 15);
         }
+
+
 
         InventoryUtils.createDisplay(Material.GOLD_NUGGET, 1, 0, "&aChest Shop", "&3You get chests every hour,\n" +
                 "&3but if you want some more:\n" +
-                "&3Buy them here!", inv, 53);
+                "&3Buy them here!", inv, 22);
+        InventoryUtils.createDisplay(Material.BARRIER, 1, 0, "&c&lCANCEL", "&3Click here to close this menu.", inv, 23);
         InventoryUtils.createDisplay(Material.WORKBENCH, 1, 0, "&aChest Crafting",
-                "&3Use chests to craft higher tiered chests, \n&3this means you can get better loot!", inv, 54);
+                "&3Use chests to craft higher tiered chests, \n&3this means you can get better loot!", inv, 24);
 
         p.openInventory(inv);
     }
@@ -76,7 +79,6 @@ public class ChestChooseUI implements CommandExecutor,Listener {
         if(!event.getCurrentItem().hasItemMeta())
             return;
 
-
         switch (event.getCurrentItem().getType()){
             case GOLD_NUGGET:
                 ChestsShop.openChest(p);
@@ -87,10 +89,28 @@ public class ChestChooseUI implements CommandExecutor,Listener {
             case CHEST:
                 NormalChestOpening.openNormal(p);
                 PlayerUtils.removeChest(p, 1, "opened a normal chest");
+                Bukkit.getServer().getLogger().info(p.getName() + " is opening a normal chest!");
                 break;
             case TRAPPED_CHEST:
                 EpicChestOpening.openEpic(p);
                 PlayerUtils.removeEpic(p, 1, "opened a epic chest");
+                Bukkit.getServer().getLogger().info(p.getName() + " is opening a epic chest!");
+                break;
+            case ENDER_CHEST:
+                LegendChestOpening.openLegend(p);
+                PlayerUtils.removeLegend(p, 1, "opened a legendary chest");
+                ChatUtils.broadcastTag("Chests", p.getDisplayName() + " &bis going to open a &c&lLegendary Chest&b! &aWish them luck!");
+                Bukkit.getServer().getLogger().info(p.getName() + " is opening a legendary chest!");
+                break;
+            case BARRIER:
+                if(event.getSlot() == 22){
+                    p.closeInventory();
+                    p.playSound(p.getLocation(), Sound.CLICK, 100, 1);
+                    break;
+                } else {
+                    p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 100, 1);
+                    break;
+                }
             default:
                 break;
         }

@@ -24,14 +24,12 @@ import java.util.Random;
 public class MiscUtils {
 
     public static String color(String s){
-        String colorString = s.replace('&', '\u00A7');
-        return colorString;
+        return s.replace('&', '\u00A7');
     }
 
     public static int randomInt(int min, int max){
         Random rand = new Random();
-        int randomNum = rand.nextInt((max - min) + 1) + min;
-        return randomNum;
+        return rand.nextInt((max - min) + 1) + min;
     }
 
     public static boolean isInt(String str){
@@ -175,6 +173,14 @@ public class MiscUtils {
             item.remove();
         }
         PlayerUtils.shotItems.clear();
+    }
+
+    public static String formatBoolean(boolean bool){
+        if(bool){
+            return MiscUtils.color("&2True");
+        } else {
+            return MiscUtils.color("&cFalse");
+        }
     }
 
 }

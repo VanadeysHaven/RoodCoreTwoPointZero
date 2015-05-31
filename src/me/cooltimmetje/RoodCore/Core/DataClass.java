@@ -288,6 +288,11 @@ public class DataClass {
     }
 
     public static void setUpdatesList() {
+        updatesList.add("+ You can now \nopen normal and \nepic chests! \n&o/chests");
+        updatesList.add("+ Chest shop! \n \n \n&o/chests");
+        updatesList.add("+ Chest crafting! \n \n \n&o/chests");
+        updatesList.add("= Make legendary \n chests work!");
+        updatesList.add("/ Staff change! \nReges is now a \nADMIN");
         updatesList.add("+ You can now see \nthe amount of \nchests you have in \nthe TAB list.");
         updatesList.add("/ Shooting items \nhave been temp \ndisabled due to \na unfixable bug.");
         updatesList.add("+ You can now \nchange the time \nand weather by \nRClicking a clock!");
@@ -301,12 +306,8 @@ public class DataClass {
         updatesList.add("+ This board now \nshows the \nupdates \nautomagically!");
         updatesList.add("+ Diamonds now \nshoot from your \nhead when you \ngain tokens!");
         updatesList.add("+ New song! (rp 3) \nTim Berg - Bromance (Aviciis \nArena Remix)");
-        updatesList.add("+ New staff \nmember! Reges is \nnow a MOD");
         updatesList.add("/ Our IP has \nchanged! Ask \nCooltimmetje for \nthe new one!");
         updatesList.add("* The issue with \nThoThoKill's \nbirthday has been \nresolved.");
-        updatesList.add("- ThoThoKill's \nBirthday!");
-        updatesList.add("+ New Ranks: \n&9Water \n&9Water&6+ \n&9Water&6+&c+");
-        updatesList.add("+ A Hologram for \nthis board!");
 
         listUpdates();
     }

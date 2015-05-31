@@ -32,7 +32,7 @@ public class EpicChestOpening implements Listener {
         setChestSlot();
         Inventory inv = Bukkit.createInventory(null, 54, MiscUtils.color("&5Epic Chest"));
 
-        InventoryUtils.createDisplay(Material.CHEST, 1, 0, "&a&lYou are opening:", "&5&lEpic Chest".toUpperCase(), inv, 5);
+        InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&a&lYou are opening:", "&5&lEpic Chest".toUpperCase(), inv, 5);
         p.openInventory(inv);
 
         int tick = 1;
@@ -195,7 +195,7 @@ public class EpicChestOpening implements Listener {
                         if(item.equals("tokens")){
                             int tokens = MiscUtils.randomInt(100, 200);
                             InventoryUtils.createDisplay(Material.GOLD_NUGGET, 1, 0, "&9" + tokens + " tokens", null, inventory, slotFinal);
-                            PlayerUtils.addTokens(p, tokens, "found in a normal chest");
+                            PlayerUtils.addTokens(p, tokens, "found in a epic chest");
                             if(tokens == 200){
                                 ChatUtils.broadcastTag("Chests", p.getDisplayName() + "&b found &9&l" + tokens + " tokens" + " &bin a &5&lEpic Chest&b!");
                             }
@@ -228,7 +228,7 @@ public class EpicChestOpening implements Listener {
                                 int tokens = MiscUtils.randomInt(100, 200);
                                 ChatUtils.msgPlayerTag(p, "Chests", "You found a item you already have! So you got &9" + tokens + " tokens &ainstead!");
                                 InventoryUtils.createDisplay(Material.GOLD_NUGGET, 1, 0, "&9" + tokens + " tokens", null, inventory, slotFinal);
-                                PlayerUtils.addTokens(p, tokens, "found in a normal chest");
+                                PlayerUtils.addTokens(p, tokens, "found in a epic chest");
                                 if(tokens == 200){
                                     ChatUtils.broadcastTag("Chests", p.getDisplayName() + "&b found &9&l" + tokens + " tokens" + " &bin a &5&lEpic Chest&b!");
                                 }

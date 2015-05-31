@@ -22,3 +22,5 @@ commands:
         description: rankup
     chests:
         description: chests
+    advantage:
+        description: advantage

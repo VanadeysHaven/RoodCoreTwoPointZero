@@ -29,9 +29,9 @@ public class ChestsShop implements Listener {
         int legend = DataClass.legendChest.get(p.getName());
 
         InventoryUtils.createDisplay(Material.GOLD_NUGGET, 1, 0, "&aYou have &9&l" + tokens + " tokens!", null, inv, 5);
-        InventoryUtils.createDisplay(Material.CHEST, 1, 0, "&aYou have &e&l" + normal + " Normal Chests!", null, inv, 13);
-        InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 14);
-        InventoryUtils.createDisplay(Material.ENDER_CHEST, 1, 0, "&aYou have &c&l" + legend + " Legendary Chests!", null, inv, 15);
+        InventoryUtils.createDisplay(Material.CHEST, normal, 0, "&aYou have &e&l" + normal + " Normal Chests!", null, inv, 13);
+        InventoryUtils.createDisplay(Material.TRAPPED_CHEST, epic, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 14);
+        InventoryUtils.createDisplay(Material.ENDER_CHEST, legend, 0, "&aYou have &c&l" + legend + " Legendary Chests!", null, inv, 15);
 
         InventoryUtils.createDisplay(Material.CHEST, 1, 0, "&aBuy: &e&l1 Normal Chest", "&3Cost: &9&l" + DataClass.chestCost + " tokens\n" +
                 "&3Click to buy", inv, 22);
@@ -39,6 +39,8 @@ public class ChestsShop implements Listener {
                 "&3Click to buy", inv, 23);
         InventoryUtils.createDisplay(Material.ENDER_CHEST, 1, 0, "&aBuy: &c&l1 Legendary Chest!", "&3Cost: &9&l" + DataClass.chestCost*12 + " tokens\n" +
                 "&3Click to buy", inv, 24);
+
+        InventoryUtils.createDisplay(Material.BARRIER, 1, 0, "&aGo Back", null, inv, 19);
 
         p.openInventory(inv);
     }
@@ -122,6 +124,10 @@ public class ChestsShop implements Listener {
                 } else {
                     break;
                 }
+            case BARRIER:
+                ChestChooseUI.openChestChooser(p, DataClass.normalChests.get(p.getName()), DataClass.epicChest.get(p.getName()), DataClass.legendChest.get(p.getName()));
+                p.playSound(p.getLocation(), Sound.CLICK, 100, 1);
+                break;
             default:
                 break;
         }

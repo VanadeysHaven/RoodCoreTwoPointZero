@@ -177,6 +177,20 @@ public class PlayerUtils {
         return groupName;
     }
 
+    public static void rainbowDisplayName(Player p){
+        String displayName = ChatColor.stripColor(p.getDisplayName());
+
+        String[] split = displayName.split(" ");
+        String name = split[1];
+
+        StringBuilder sb = new StringBuilder();
+        for(int x = 0; x < name.length(); x++){
+            sb.append("&" + MiscUtils.randomColor() + name.charAt(x));
+        }
+
+        p.setDisplayName(MiscUtils.color(p.getDisplayName().replace(name, sb.toString().trim())));
+    }
+
     public static void rankUp(Player p) {
         String curGroupName = PlayerUtils.getGroup(p).trim();
         String curGroupColor = DataClass.idColor.get(DataClass.nameID.get(curGroupName));
