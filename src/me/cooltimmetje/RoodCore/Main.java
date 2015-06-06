@@ -6,10 +6,8 @@ import me.cooltimmetje.RoodCore.Core.ArmorStandCustomization.MainMenu;
 import me.cooltimmetje.RoodCore.Core.DataClass;
 import me.cooltimmetje.RoodCore.Core.MysteryChests.*;
 import me.cooltimmetje.RoodCore.Core.Rankup;
-import me.cooltimmetje.RoodCore.Core.UpdatesBoard;
 import me.cooltimmetje.RoodCore.EventListeners.ChatEvent;
 import me.cooltimmetje.RoodCore.EventListeners.JoinQuitEvent;
-import me.cooltimmetje.RoodCore.EventListeners.PickupManager;
 import me.cooltimmetje.RoodCore.EventListeners.ResourcePackEvent;
 import me.cooltimmetje.RoodCore.MysqlManager.Database;
 import me.cooltimmetje.RoodCore.Timers.Announce;
@@ -39,7 +37,7 @@ public class Main extends JavaPlugin {
         plugin = this;
         Database.connectToDatabase();
 
-        registerEvents(this, new JoinQuitEvent(), new ResourcePackEvent(), new JukeboxUI(), new Rankup(), new PickupManager(), new TimeRainUI(),
+        registerEvents(this, new JoinQuitEvent(), new ResourcePackEvent(), new JukeboxUI(), new Rankup(), new TimeRainUI(),
                 new ChestChooseUI(), new NormalChestOpening(), new ChestCrafting(), new ChestsShop(), new EpicChestOpening(), new LegendChestOpening(),
                 new MainMenu(), new ChatEvent(), new Contents());
         getCommand("tokens").setExecutor(new TokensCommand());
@@ -52,6 +50,7 @@ public class Main extends JavaPlugin {
         getCommand("rankup").setExecutor(new Rankup());
         getCommand("chests").setExecutor(new ChestChooseUI());
         getCommand("advantage").setExecutor(new ThomasCommand());
+        getCommand("sell").setExecutor(new SellCommand());
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             Database.loadData(p);
@@ -71,21 +70,22 @@ public class Main extends JavaPlugin {
         DataClass.setColorCodes();
         DataClass.listRanks();
         DataClass.setUpdatesList();
-        UpdatesBoard.updateBoard();
+//        Holograms.setHolograms();
+//        UpdatesBoard.updateBoard();
 
     }
 
     @Override
     public void onDisable(){
         Bukkit.getScheduler().cancelAllTasks();
-        UpdatesBoard.removeHologram();
+//        UpdatesBoard.removeHologram();
         MiscUtils.removeAllJukeboxHologram();
-        MiscUtils.despawnItems();
+//        Holograms.removeHolograms();
         for(Player p : Bukkit.getOnlinePlayers()) {
             Database.saveData(p);
         }
 
-//        Database.hikari.close();
+        Database.hikari.shutdown();
         plugin = null;
     }
 

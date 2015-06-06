@@ -126,7 +126,7 @@ public class LegendChestOpening implements Listener {
 
     private void rollSlot(Player p, int slot, Inventory inventory) {
         String[] items;
-        items = new String[160];
+        items = new String[157];
 
         int index = 0;
         for(int i = 0; i < 20; i++){
@@ -138,7 +138,7 @@ public class LegendChestOpening implements Listener {
         for(int i = 0; i < 35; i++){
             items[index++] = "gold";
         }
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 10; i++) {
             items[index++] = "emerald";
         }
         for(int i = 0; i < 40; i++){
@@ -147,7 +147,7 @@ public class LegendChestOpening implements Listener {
         for(int i = 0; i < 15; i++){
             items[index++] = "xp";
         }
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 2; i++){
             items[index++] = "netherstar";
         }
         for(int i = 0; i < 5; i++){
@@ -230,7 +230,7 @@ public class LegendChestOpening implements Listener {
                             Bukkit.getWorld("Survival").dropItemNaturally(p.getLocation(), new ItemStack(Material.NETHER_STAR, 1));
                             ChatUtils.broadcastTag("Chests", p.getDisplayName() + "&b found &" + MiscUtils.randomColor() + "&l" + inventory.getItem(slot).getAmount() + " Nether Star" + " &bin a &c&lLegendary Chest&b!");
                         } else if (item.equals("colorname")){
-                            if(!p.hasPermission("roodcore.colorname") || p.getName().equals("Reges")) {
+                            if(!p.hasPermission("roodcore.colorname")) {
                                 InventoryUtils.createDisplay(Material.WOOL, 1, MiscUtils.randomInt(0, 15), "&" + MiscUtils.randomColor() + "RAINBOW NAME!", null, inventory, slotFinal);
                                 ChatUtils.broadcastTag("Chests", p.getDisplayName() + "&b found &a&lRainbow Name" + " &bin a &c&lLegendary Chest&b!");
                                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " roodcore.colorname");

@@ -40,7 +40,7 @@ public class DataClass {
     public static int tokenTime = 15;
 
     public static int announceTicks = 6000;
-    public static int announceStrings = 5;
+    public static int announceStrings = 6;
     public static int rankupCost = 300;
 
     public static int chestTime = 60;
@@ -56,6 +56,7 @@ public class DataClass {
         announce.put(3, "This server is still in developement! Please report any bugs you find.");
         announce.put(4, "Did you know: You can store your XP! Type &o/xp &afor information on how to do it!");
         announce.put(5, "Equip one of our custom-made resourcepacks! Type &o/rp <id>");
+        announce.put(6, "You can now open &3&lMystery &mChests&r &3&l&oMandjes&a! &o/chests");
     }
 
     public static void setResourceURL() {
@@ -288,6 +289,7 @@ public class DataClass {
     }
 
     public static void setUpdatesList() {
+        updatesList.add("* The item amounts\nin the chest crafting/\nshop now update\ncorrectly!");
         updatesList.add("+ You can now \nopen normal and \nepic chests! \n&o/chests");
         updatesList.add("+ Chest shop! \n \n \n&o/chests");
         updatesList.add("+ Chest crafting! \n \n \n&o/chests");
@@ -307,7 +309,6 @@ public class DataClass {
         updatesList.add("+ Diamonds now \nshoot from your \nhead when you \ngain tokens!");
         updatesList.add("+ New song! (rp 3) \nTim Berg - Bromance (Aviciis \nArena Remix)");
         updatesList.add("/ Our IP has \nchanged! Ask \nCooltimmetje for \nthe new one!");
-        updatesList.add("* The issue with \nThoThoKill's \nbirthday has been \nresolved.");
 
         listUpdates();
     }

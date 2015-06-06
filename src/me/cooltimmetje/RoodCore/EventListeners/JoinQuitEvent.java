@@ -95,8 +95,6 @@ public class JoinQuitEvent implements Listener {
         DataClass.experiencePoint.remove(p.getName());
         DataClass.chestsTime.remove(p.getName());
         DataClass.normalChests.remove(p.getName());
-
-        MiscUtils.despawnItems();
     }
 
     private boolean authencate(Player p){

@@ -8,6 +8,7 @@ import me.cooltimmetje.RoodCore.Utilities.ChatUtils;
 import me.cooltimmetje.RoodCore.Utilities.MiscUtils;
 import me.cooltimmetje.RoodCore.Utilities.PlayerUtils;
 import me.cooltimmetje.RoodCore.Utilities.TitleUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.sql.Connection;
@@ -34,34 +35,37 @@ public class Database {
         hikari.addDataSourceProperty("password", Main.getPlugin().getConfig().getString("Database.password"));
     }
 
-    public static void loadData(Player p) throws NullPointerException{
+    public static void loadData(Player p){
         ChatUtils.msgPlayerTag(p, "Profile", "Loading your profile from the Database... &oPlease Wait...");
 
         Connection c = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+
+        PreparedStatement psData = null;
+        PreparedStatement psSettings = null;
+
+        ResultSet rsData = null;
+        ResultSet rsSettings = null;
+
         String uuid = PlayerUtils.getUUID(p);
-        String load = "SELECT * FROM playerdata WHERE uuid = '" + uuid + "';";
+
+        String loadData = "SELECT * FROM playerdata WHERE uuid = '" + uuid + "';";
+        String loadSettings = "SELECT * FROM player_settings WHERE uuid = '" + uuid + "';";
 
         try {
             c = hikari.getConnection();
-            ps = c.prepareStatement(load);
-            rs = ps.executeQuery();
 
-            if(rs.next()){
-                DataClass.tokens.put(p.getName(), rs.getInt("tokens"));
-                DataClass.tokensTime.put(p.getName(), rs.getInt("token_time"));
-                DataClass.experiencePoint.put(p.getName(), rs.getInt("experience_point"));
-                DataClass.resourcePack.put(p.getName(), rs.getInt("resource_pack"));
-                DataClass.normalChests.put(p.getName(), rs.getInt("normal_chests"));
-                DataClass.chestsTime.put(p.getName(), rs.getInt("chest_time"));
-                DataClass.epicChest.put(p.getName(), rs.getInt("epic_chest"));
-                DataClass.legendChest.put(p.getName(), rs.getInt("legend_chest"));
+            psData = c.prepareStatement(loadData);
+            psSettings = c.prepareStatement(loadSettings);
+
+            rsData = psData.executeQuery();
+            rsSettings = psSettings.executeQuery();
+
+            if(rsData.next() && rsSettings.next()){
+                setData(rsData, p);
+                setSettings(rsSettings, p);
                 ChatUtils.msgPlayerTag(p, "Profile", "Profile loaded! &lWE DID IT! &a*dances*");
             } else {
-                ChatUtils.msgPlayerTag(p, "Profile", "You do not have a profile yet! So we will create one for you! This process will happen automagically with the use of" +
-                        " some magic! Ooooh! Maaaagiiiicccc!");
-                createProfile(p);
+                //create profile
             }
 
         } catch (SQLException e){
@@ -76,49 +80,85 @@ public class Database {
                 }
             }
 
-            // Organize
-            if(ps != null) {
+            if(psData != null) {
                 try {
-                    ps.close();
+                    psData.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(rsData != null){
+                try {
+                    rsData.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if(psSettings != null) {
+                try {
+                    psSettings.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(rsSettings != null){
+                try {
+                    rsSettings.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
 
-        if(rs != null){
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+    private static void setSettings(ResultSet rsSettings, Player p) {
+        try {
+            DataClass.resourcePack.put(p.getName(), rsSettings.getInt("resource_pack"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void setData(ResultSet rs, Player p) {
+        try {
+            DataClass.tokens.put(p.getName(), rs.getInt("tokens"));
+            DataClass.tokensTime.put(p.getName(), rs.getInt("token_time"));
+            DataClass.experiencePoint.put(p.getName(), rs.getInt("experience_point"));
+            DataClass.normalChests.put(p.getName(), rs.getInt("normal_chests"));
+            DataClass.chestsTime.put(p.getName(), rs.getInt("chest_time"));
+            DataClass.epicChest.put(p.getName(), rs.getInt("epic_chest"));
+            DataClass.legendChest.put(p.getName(), rs.getInt("legend_chest"));
+        } catch (SQLException e){
+            e.printStackTrace();
         }
     }
 
     private static void createProfile(Player p) {
         Connection c = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
+        PreparedStatement psSettigns = null;
         String uuid = PlayerUtils.getUUID(p);
-        String update = "INSERT INTO playerdata VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE uuid=?";
+        String createData = "INSERT INTO playerdata VALUES(?, ?, 0, ?, 0, 0, ?, 0, 0)";
+        String createSettings = "INSERT INTO player_settings VALUES(?, ?, 0)";
 
         try{
             c = hikari.getConnection();
 
-            ps = c.prepareStatement(update);
+            ps = c.prepareStatement(createData);
+            psSettigns = c.prepareStatement(createSettings);
+
             ps.setString(1, uuid);
             ps.setString(2, p.getName());
-            ps.setString(3, p.getAddress().toString());
-            ps.setInt(4, 0);
-            ps.setInt(5, DataClass.tokenTime);
-            ps.setInt(6, 0);
-            ps.setInt(7, 0);
-            ps.setInt(8, 0);
-            ps.setInt(9, DataClass.chestTime);
-            ps.setInt(10, 0);
-            ps.setInt(11, 0);
-            ps.setString(12, uuid);
+            ps.setInt(3, DataClass.tokenTime);
+            ps.setInt(4, DataClass.chestTime);
+
+            psSettigns.setString(1, uuid);
+            psSettigns.setString(2, p.getName());
+
             ps.execute();
+            psSettigns.execute();
+
             ChatUtils.msgPlayerTag(p, "Profile", "Profile created! &lYaaay! &a*whoop whoop*");
         } catch (SQLException e){
             e.printStackTrace();
@@ -140,43 +180,46 @@ public class Database {
                     e.printStackTrace();
                 }
             }
+
+            if(psSettigns != null) {
+                try {
+                    psSettigns.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-
-
     }
 
     public static void saveData(Player p) {
         new ActionbarTitleObject("\u00A79Profile> \u00A7aSaving profile... \u00A7oPlease Wait...").send(p);
         Connection c = null;
         PreparedStatement ps = null;
+        PreparedStatement psSettings = null;
         String uuid = PlayerUtils.getUUID(p);
-        String update = "INSERT INTO playerdata VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE " +
-                "tokens=?,token_time=?,experience_point=?,resource_pack=?,normal_chests=?,chest_time=?,epic_chest=?,legend_chest=?";
-//        String update = "UPDATE playerdata SET uuid=?,last_name=?,last_ip_adress=?,tokens=?,token_time=? WHERE 1";
+        String updateData = "UPDATE playerdata SET last_name=?,tokens=?,token_time=?,experience_point=?,normal_chests=?,chest_time=?,epic_chest=?,legend_chest=? WHERE uuid=?";
+        String updateSettings = "UPDATE playerdata SET last_name=?,resource_pack=? WHERE uuid=?";
         try{
             c = hikari.getConnection();
 
-            ps = c.prepareStatement(update);
-            ps.setString(1, uuid);
-            ps.setString(2, p.getName());
-            ps.setString(3, p.getAddress().toString());
-            ps.setInt(4, DataClass.tokens.get(p.getName()));
-            ps.setInt(5, DataClass.tokensTime.get(p.getName()));
-            ps.setInt(6, DataClass.experiencePoint.get(p.getName()));
-            ps.setInt(7, DataClass.resourcePack.get(p.getName()));
-            ps.setInt(8, DataClass.normalChests.get(p.getName()));
-            ps.setInt(9, DataClass.chestsTime.get(p.getName()));
-            ps.setInt(10, DataClass.epicChest.get(p.getName()));
-            ps.setInt(11, DataClass.legendChest.get(p.getName()));
 
-            ps.setInt(12, DataClass.tokens.get(p.getName()));
-            ps.setInt(13, DataClass.tokensTime.get(p.getName()));
-            ps.setInt(14, DataClass.experiencePoint.get(p.getName()));
-            ps.setInt(15, DataClass.resourcePack.get(p.getName()));
-            ps.setInt(16, DataClass.normalChests.get(p.getName()));
-            ps.setInt(17, DataClass.chestsTime.get(p.getName()));
-            ps.setInt(18, DataClass.epicChest.get(p.getName()));
-            ps.setInt(19, DataClass.legendChest.get(p.getName()));
+            ps = c.prepareStatement(updateData);
+            ps.setString(1, p.getName());
+            ps.setInt(2, DataClass.tokens.get(p.getName()));
+            ps.setInt(3, DataClass.tokensTime.get(p.getName()));
+            ps.setInt(4, DataClass.experiencePoint.get(p.getName()));
+            ps.setInt(5, DataClass.normalChests.get(p.getName()));
+            ps.setInt(6, DataClass.chestsTime.get(p.getName()));
+            ps.setInt(7, DataClass.epicChest.get(p.getName()));
+            ps.setInt(8, DataClass.legendChest.get(p.getName()));
+            ps.setString(9, uuid);
+
+            psSettings = c.prepareStatement(updateSettings);
+            psSettings.setString(1, p.getName());
+            psSettings.setInt(2, DataClass.resourcePack.get(p.getName()));
+            psSettings.setString(3, uuid);
+
+            psSettings.execute();
             ps.execute();
             new ActionbarTitleObject("\u00A79Profile> \u00A7aProfile saved!").send(p);
         } catch (SQLException e){
@@ -191,10 +234,16 @@ public class Database {
                 }
             }
 
-            // Organize
             if(ps != null) {
                 try {
                     ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(psSettings != null) {
+                try {
+                    psSettings.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

@@ -99,7 +99,7 @@ public class ChestChooseUI implements CommandExecutor,Listener {
             case ENDER_CHEST:
                 LegendChestOpening.openLegend(p);
                 PlayerUtils.removeLegend(p, 1, "opened a legendary chest");
-                ChatUtils.broadcastTag("Chests", p.getDisplayName() + " &bis going to open a &c&lLegendary Chest&b! &aWish them luck!");
+                ChatUtils.broadcastTag("Chests", p.getDisplayName() + " &bis going to open a &c&lLegendary MAND&b! &aWish them luck!");
                 Bukkit.getServer().getLogger().info(p.getName() + " is opening a legendary chest!");
                 break;
             case BARRIER:

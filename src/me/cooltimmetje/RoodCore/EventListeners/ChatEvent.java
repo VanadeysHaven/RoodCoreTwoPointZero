@@ -14,7 +14,7 @@ public class ChatEvent implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event){
         Player p = event.getPlayer();
-        if(p.hasPermission("roodcore.colorname") && !p.getName().equals("Reges")){
+        if(p.hasPermission("roodcore.colorname")){
             PlayerUtils.rainbowDisplayName(p);
         }
     }

@@ -27,9 +27,9 @@ public class ChestCrafting implements Listener {
         int epic = DataClass.epicChest.get(p.getName());
         int legend = DataClass.legendChest.get(p.getName());
 
-        InventoryUtils.createDisplay(Material.CHEST, 1, 0, "&aYou have &e&l" + normal + " Normal Chests!", null, inv, 4);
-        InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 5);
-        InventoryUtils.createDisplay(Material.ENDER_CHEST, 1, 0, "&aYou have &c&l" + legend + " Legendary Chests!", null, inv, 6);
+        InventoryUtils.createDisplay(Material.CHEST, normal, 0, "&aYou have &e&l" + normal + " Normal Chests!", null, inv, 4);
+        InventoryUtils.createDisplay(Material.TRAPPED_CHEST, epic, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 5);
+        InventoryUtils.createDisplay(Material.ENDER_CHEST, legend, 0, "&aYou have &c&l" + legend + " Legendary Chests!", null, inv, 6);
 
         InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&aCraft: &5&l1 Epic Chest", "&3Cost: &e&l4 Normal Chests\n" +
                 "&3Click to craft", inv, 14);
@@ -75,9 +75,10 @@ public class ChestCrafting implements Listener {
                             normal = DataClass.normalChests.get(p.getName());
                             epic = DataClass.epicChest.get(p.getName());
 
-                            InventoryUtils.createDisplay(Material.CHEST, 1, 0, "&aYou have &e&l" + normal + " Normal Chests!", null, inv, 4);
-                            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 5);
+                            InventoryUtils.createDisplay(Material.CHEST, normal, 0, "&aYou have &e&l" + normal + " Normal Chests!", null, inv, 4);
+                            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, epic, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 5);
                             p.playSound(p.getLocation(), Sound.ANVIL_USE, 100, 1);
+                            break;
                         } else {
                             break;
                         }
@@ -97,9 +98,10 @@ public class ChestCrafting implements Listener {
                             normal = DataClass.normalChests.get(p.getName());
                             epic = DataClass.epicChest.get(p.getName());
 
-                            InventoryUtils.createDisplay(Material.CHEST, 1, 0, "&aYou have &e&l" + normal + " Normal Chests!", null, inv, 4);
-                            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 5);
+                            InventoryUtils.createDisplay(Material.CHEST, normal, 0, "&aYou have &e&l" + normal + " Normal Chests!", null, inv, 4);
+                            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, epic, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 5);
                             p.playSound(p.getLocation(), Sound.ANVIL_USE, 100, 1);
+                            break;
                         } else {
                             break;
                         }
@@ -111,9 +113,10 @@ public class ChestCrafting implements Listener {
                             epic = DataClass.epicChest.get(p.getName());
                             legend = DataClass.legendChest.get(p.getName());
 
-                            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 5);
-                            InventoryUtils.createDisplay(Material.ENDER_CHEST, 1, 0, "&aYou have &c&l" + legend + " Legendary Chests!", null, inv, 6);
+                            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, epic, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 5);
+                            InventoryUtils.createDisplay(Material.ENDER_CHEST, legend, 0, "&aYou have &c&l" + legend + " Legendary Chests!", null, inv, 6);
                             p.playSound(p.getLocation(), Sound.ANVIL_USE, 100, 1);
+                            break;
                         } else {
                             break;
                         }
@@ -133,9 +136,10 @@ public class ChestCrafting implements Listener {
                             epic = DataClass.epicChest.get(p.getName());
                             legend = DataClass.legendChest.get(p.getName());
 
-                            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 5);
-                            InventoryUtils.createDisplay(Material.ENDER_CHEST, 1, 0, "&aYou have &c&l" + legend + " Legendary Chests!", null, inv, 6);
+                            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, epic, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 5);
+                            InventoryUtils.createDisplay(Material.ENDER_CHEST, legend, 0, "&aYou have &c&l" + legend + " Legendary Chests!", null, inv, 6);
                             p.playSound(p.getLocation(), Sound.ANVIL_USE, 100, 1);
+                            break;
                         } else {
                             break;
                         }

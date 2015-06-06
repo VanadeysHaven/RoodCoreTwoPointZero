@@ -72,7 +72,8 @@ public class ChestsShop implements Listener {
                             int normal = DataClass.normalChests.get(p.getName());
 
                             InventoryUtils.createDisplay(Material.GOLD_NUGGET, 1, 0, "&aYou have &9&l" + tokens + " tokens!", null, inv, 5);
-                            InventoryUtils.createDisplay(Material.CHEST, 1, 0, "&aYou have &e&l" + normal + " Normal Chests!", null, inv, 13);
+                            InventoryUtils.createDisplay(Material.CHEST, normal, 0, "&aYou have &e&l" + normal + " Normal Chests!", null, inv, 13);
+                            break;
                         } else {
                             break;
                         }
@@ -93,7 +94,8 @@ public class ChestsShop implements Listener {
                             int epic = DataClass.epicChest.get(p.getName());
 
                             InventoryUtils.createDisplay(Material.GOLD_NUGGET, 1, 0, "&aYou have &9&l" + tokens + " tokens!", null, inv, 5);
-                            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, 1, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 14);
+                            InventoryUtils.createDisplay(Material.TRAPPED_CHEST, epic, 0, "&aYou have &5&l" + epic + " Epic Chests!", null, inv, 14);
+                            break;
                         } else {
                             break;
                         }
@@ -114,7 +116,8 @@ public class ChestsShop implements Listener {
                             int legend = DataClass.legendChest.get(p.getName());
 
                             InventoryUtils.createDisplay(Material.GOLD_NUGGET, 1, 0, "&aYou have &9&l" + tokens + " tokens!", null, inv, 5);
-                            InventoryUtils.createDisplay(Material.ENDER_CHEST, 1, 0, "&aYou have &c&l" + legend + " Legendary Chests!", null, inv, 15);
+                            InventoryUtils.createDisplay(Material.ENDER_CHEST, legend, 0, "&aYou have &c&l" + legend + " Legendary Chests!", null, inv, 15);
+                            break;
                         } else {
                             break;
                         }

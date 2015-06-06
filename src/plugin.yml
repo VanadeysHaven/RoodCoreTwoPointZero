@@ -24,3 +24,5 @@ commands:
         description: chests
     advantage:
         description: advantage
+    sell:
+        description: sell

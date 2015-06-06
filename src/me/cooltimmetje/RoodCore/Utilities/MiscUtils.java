@@ -168,13 +168,6 @@ public class MiscUtils {
         return color;
     }
 
-    public static void despawnItems(){
-        for(Entity item : PlayerUtils.shotItems){
-            item.remove();
-        }
-        PlayerUtils.shotItems.clear();
-    }
-
     public static String formatBoolean(boolean bool){
         if(bool){
             return MiscUtils.color("&2True");
