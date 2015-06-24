@@ -4,16 +4,14 @@ import me.cooltimmetje.RoodCore.Commands.*;
 import me.cooltimmetje.RoodCore.Core.ArmorStandCustomization.Contents;
 import me.cooltimmetje.RoodCore.Core.ArmorStandCustomization.MainMenu;
 import me.cooltimmetje.RoodCore.Core.DataClass;
+import me.cooltimmetje.RoodCore.Core.Gadgets.GadgetsMenu;
 import me.cooltimmetje.RoodCore.Core.MysteryChests.*;
 import me.cooltimmetje.RoodCore.Core.Rankup;
 import me.cooltimmetje.RoodCore.EventListeners.ChatEvent;
 import me.cooltimmetje.RoodCore.EventListeners.JoinQuitEvent;
 import me.cooltimmetje.RoodCore.EventListeners.ResourcePackEvent;
 import me.cooltimmetje.RoodCore.MysqlManager.Database;
-import me.cooltimmetje.RoodCore.Timers.Announce;
-import me.cooltimmetje.RoodCore.Timers.Chests;
-import me.cooltimmetje.RoodCore.Timers.DataSaving;
-import me.cooltimmetje.RoodCore.Timers.Tokens;
+import me.cooltimmetje.RoodCore.Timers.*;
 import me.cooltimmetje.RoodCore.UserInterfaces.JukeboxUI;
 import me.cooltimmetje.RoodCore.UserInterfaces.TimeRainUI;
 import me.cooltimmetje.RoodCore.Utilities.MiscUtils;
@@ -37,7 +35,7 @@ public class Main extends JavaPlugin {
         plugin = this;
         Database.connectToDatabase();
 
-        registerEvents(this, new JoinQuitEvent(), new ResourcePackEvent(), new JukeboxUI(), new Rankup(), new TimeRainUI(),
+        registerEvents(this, new JoinQuitEvent(), new ResourcePackEvent(), new JukeboxUI(), new Rankup(), new TimeRainUI(), new GadgetsMenu(),
                 new ChestChooseUI(), new NormalChestOpening(), new ChestCrafting(), new ChestsShop(), new EpicChestOpening(), new LegendChestOpening(),
                 new MainMenu(), new ChatEvent(), new Contents());
         getCommand("tokens").setExecutor(new TokensCommand());
@@ -51,6 +49,7 @@ public class Main extends JavaPlugin {
         getCommand("chests").setExecutor(new ChestChooseUI());
         getCommand("advantage").setExecutor(new ThomasCommand());
         getCommand("sell").setExecutor(new SellCommand());
+        getCommand("gadgets").setExecutor(new GadgetsMenu());
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             Database.loadData(p);
@@ -70,6 +69,7 @@ public class Main extends JavaPlugin {
         DataClass.setColorCodes();
         DataClass.listRanks();
         DataClass.setUpdatesList();
+        OnlineChecker.onlineChecker();
 //        Holograms.setHolograms();
 //        UpdatesBoard.updateBoard();
 
@@ -85,7 +85,8 @@ public class Main extends JavaPlugin {
             Database.saveData(p);
         }
 
-        Database.hikari.shutdown();
+//        Database.hikari.shutdown();
+
         plugin = null;
     }
 

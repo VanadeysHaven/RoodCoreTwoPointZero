@@ -44,11 +44,7 @@ public class MiscUtils {
     public static boolean cooldownCheck(long lastused, int cdtime){
         long currentTime = System.currentTimeMillis();
         int cdmillis = cdtime * 1000;
-        if(currentTime - lastused >= cdmillis){
-            return true;
-        } else {
-            return false;
-        }
+        return currentTime - lastused >= cdmillis;
     }
 
     public static String formatTime(int seconds){
@@ -173,6 +169,14 @@ public class MiscUtils {
             return MiscUtils.color("&2True");
         } else {
             return MiscUtils.color("&cFalse");
+        }
+    }
+
+    public static String formatYesNo(boolean bool){
+        if(bool){
+            return MiscUtils.color("&2Yes");
+        } else {
+            return MiscUtils.color("&cNo");
         }
     }
 

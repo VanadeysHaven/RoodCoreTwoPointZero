@@ -10,17 +10,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/Bestanden/Minecraft/Servers/Vanilla - Spigot/spigot-1.8-R0.1-SNAPSHOT.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://D:/Bestanden/Minecraft/Servers/Vanilla - Spigot/spigot-1.8-R0.1-SNAPSHOT.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://D:/Bestanden/Minecraft/Developement stuff/HikariCP-2.3.7.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -48,7 +37,18 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/Bestanden/Minecraft/Servers/Vanilla - Spigot/plugins/TitleManager.jar!/" />
+          <root url="jar://D:/Bestanden/Minecraft/Servers/The TeamRood Network/Online Server/spigot_server.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://D:/Bestanden/Minecraft/Servers/The TeamRood Network/Online Server/spigot_server.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://D:/Bestanden/Minecraft/Servers/The TeamRood Network/Online Server/plugins/TitleManager.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -57,7 +57,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/Bestanden/Minecraft/Servers/Vanilla - Spigot/plugins/ResourcePackAPI_v1.2.jar!/" />
+          <root url="jar://D:/Bestanden/Minecraft/Servers/The TeamRood Network/Online Server/plugins/ResourcePackAPI_v1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -66,7 +66,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/Bestanden/Minecraft/Servers/Vanilla - Spigot/plugins/HolographicDisplays.jar!/" />
+          <root url="jar://D:/Bestanden/Minecraft/Servers/The TeamRood Network/Online Server/plugins/HolographicDisplays.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

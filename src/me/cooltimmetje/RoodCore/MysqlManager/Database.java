@@ -11,6 +11,8 @@ import me.cooltimmetje.RoodCore.Utilities.TitleUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -65,7 +67,7 @@ public class Database {
                 setSettings(rsSettings, p);
                 ChatUtils.msgPlayerTag(p, "Profile", "Profile loaded! &lWE DID IT! &a*dances*");
             } else {
-                //create profile
+                createProfile(p);
             }
 
         } catch (SQLException e){
@@ -115,6 +117,7 @@ public class Database {
     private static void setSettings(ResultSet rsSettings, Player p) {
         try {
             DataClass.resourcePack.put(p.getName(), rsSettings.getInt("resource_pack"));
+            DataClass.selectedGadget.put(p.getName(), rsSettings.getInt("selected_gadget"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -129,6 +132,7 @@ public class Database {
             DataClass.chestsTime.put(p.getName(), rs.getInt("chest_time"));
             DataClass.epicChest.put(p.getName(), rs.getInt("epic_chest"));
             DataClass.legendChest.put(p.getName(), rs.getInt("legend_chest"));
+            DataClass.paintballAmmo.put(p.getName(), rs.getInt("paintball_ammo"));
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -139,8 +143,8 @@ public class Database {
         PreparedStatement ps = null;
         PreparedStatement psSettigns = null;
         String uuid = PlayerUtils.getUUID(p);
-        String createData = "INSERT INTO playerdata VALUES(?, ?, 0, ?, 0, 0, ?, 0, 0)";
-        String createSettings = "INSERT INTO player_settings VALUES(?, ?, 0)";
+        String createData = "INSERT INTO playerdata VALUES(?, ?, 0, ?, 0, 0, ?, 0, 0, 50)";
+        String createSettings = "INSERT INTO player_settings VALUES(?, ?, 0, 0)";
 
         try{
             c = hikari.getConnection();
@@ -197,8 +201,8 @@ public class Database {
         PreparedStatement ps = null;
         PreparedStatement psSettings = null;
         String uuid = PlayerUtils.getUUID(p);
-        String updateData = "UPDATE playerdata SET last_name=?,tokens=?,token_time=?,experience_point=?,normal_chests=?,chest_time=?,epic_chest=?,legend_chest=? WHERE uuid=?";
-        String updateSettings = "UPDATE playerdata SET last_name=?,resource_pack=? WHERE uuid=?";
+        String updateData = "UPDATE playerdata SET last_name=?,tokens=?,token_time=?,experience_point=?,normal_chests=?,chest_time=?,epic_chest=?,legend_chest=?,paintball_ammo=? WHERE uuid=?";
+        String updateSettings = "UPDATE player_settings SET last_name=?,resource_pack=?,selected_gadget=? WHERE uuid=?";
         try{
             c = hikari.getConnection();
 
@@ -212,12 +216,14 @@ public class Database {
             ps.setInt(6, DataClass.chestsTime.get(p.getName()));
             ps.setInt(7, DataClass.epicChest.get(p.getName()));
             ps.setInt(8, DataClass.legendChest.get(p.getName()));
-            ps.setString(9, uuid);
+            ps.setInt(9, DataClass.paintballAmmo.get(p.getName()));
+            ps.setString(10, uuid);
 
             psSettings = c.prepareStatement(updateSettings);
             psSettings.setString(1, p.getName());
             psSettings.setInt(2, DataClass.resourcePack.get(p.getName()));
-            psSettings.setString(3, uuid);
+            psSettings.setInt(3, DataClass.selectedGadget.get(p.getName()));
+            psSettings.setString(4, uuid);
 
             psSettings.execute();
             ps.execute();

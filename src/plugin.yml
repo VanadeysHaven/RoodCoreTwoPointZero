@@ -26,3 +26,5 @@ commands:
         description: advantage
     sell:
         description: sell
+    gadgets:
+        description: gadgets

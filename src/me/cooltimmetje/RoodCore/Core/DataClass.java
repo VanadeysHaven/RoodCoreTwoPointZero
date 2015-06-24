@@ -13,10 +13,6 @@ import java.util.HashMap;
 public class DataClass {
 
     public static HashMap<Integer, String> announce = new HashMap<>();
-    public static HashMap<String, Integer> tokens = new HashMap<>();
-    public static HashMap<String, Integer> tokensTime = new HashMap<>();
-    public static HashMap<String, Integer> experiencePoint = new HashMap<>();
-    public static HashMap<String, Integer> resourcePack = new HashMap<>();
     public static HashMap<Integer, String> resourceURL = new HashMap<>();
     public static HashMap<Integer, HashMap> resourceList = new HashMap<>();
     public static HashMap<String, String> resource1 = new HashMap<>();
@@ -27,12 +23,20 @@ public class DataClass {
     public static HashMap<Integer, String> idColor = new HashMap<>();
     public static HashMap<Integer, String> colorCodes = new HashMap<>();
     public static HashMap<Integer, String> updates = new HashMap<>();
+    public static ArrayList<String> updatesList = new ArrayList<>();
+
+    public static HashMap<String, Integer> experiencePoint = new HashMap<>();
+    public static HashMap<String, Integer> resourcePack = new HashMap<>();
+    public static HashMap<String, Integer> tokens = new HashMap<>();
+    public static HashMap<String, Integer> tokensTime = new HashMap<>();
     public static HashMap<String, Integer> chestsTime = new HashMap<>();
     public static HashMap<String, Integer> normalChests = new HashMap<>();
     public static HashMap<String, Integer> epicChest = new HashMap<>();
     public static HashMap<String, Integer> legendChest = new HashMap<>();
+    public static HashMap<String, Integer> selectedGadget = new HashMap<>();
+    public static HashMap<String, Integer> paintballAmmo = new HashMap<>();
 
-    public static ArrayList<String> updatesList = new ArrayList<>();
+
 
     public static int tokensIncrement = 20;
     public static int tokenDoubleChance = 10;
@@ -41,7 +45,7 @@ public class DataClass {
 
     public static int announceTicks = 6000;
     public static int announceStrings = 6;
-    public static int rankupCost = 300;
+    public static int rankupCost = 750;
 
     public static int chestTime = 60;
     public static int chestIncrement = 1;
